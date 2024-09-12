@@ -1,3 +1,4 @@
+import 'package:carwashapp/core/utils/media_query_utils.dart';
 import 'package:carwashapp/core/utils/values.dart';
 import 'package:carwashapp/features/auth/controller/auth_bloc/auth_bloc.dart';
 import 'package:flutter/material.dart';
@@ -54,8 +55,10 @@ class _PickCarScreenState extends State<PickCarScreen> {
                         const Spacer(),
                         Image.asset(
                           carType[index].img,
-                          height: 50,
-                          width: 50,
+                          height: MediaQueryUtils.getHeightPercentage(
+                              context, 0.060),
+                          width: MediaQueryUtils.getHeightPercentage(
+                              context, 0.060),
                         ),
                       ],
                     ),
@@ -100,7 +103,7 @@ class CustomAppBar extends StatelessWidget {
     final Color primaryColor = Theme.of(context).colorScheme.primary;
 
     return Container(
-      height: 175,
+      height: MediaQueryUtils.getHeightPercentage(context, 0.18),
       padding: const EdgeInsets.symmetric(horizontal: 15),
       decoration: BoxDecoration(
         color: primaryColor,
@@ -113,7 +116,7 @@ class CustomAppBar extends StatelessWidget {
         mainAxisAlignment: MainAxisAlignment.spaceBetween,
         children: [
           Text(
-            'Before we start!',
+            'Pick Your Car!',
             style: TextStyle(
                 fontSize: 25.0,
                 color: Theme.of(context).colorScheme.surface,
@@ -121,7 +124,7 @@ class CustomAppBar extends StatelessWidget {
           ),
           Image.asset(
             'assets/images/sponge_11363814.png',
-            height: 50,
+            height: MediaQueryUtils.getHeightPercentage(context, 0.060),
           ),
         ],
       ),

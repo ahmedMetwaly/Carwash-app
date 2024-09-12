@@ -1,4 +1,5 @@
 import 'package:carwashapp/core/constants/routes.dart';
+import 'package:carwashapp/core/utils/media_query_utils.dart';
 import 'package:carwashapp/core/utils/values.dart';
 import 'package:carwashapp/features/auth/controller/auth_bloc/auth_events.dart';
 import 'package:carwashapp/features/auth/controller/auth_bloc/auth_states.dart';
@@ -29,7 +30,6 @@ class ProfileScreen extends StatelessWidget {
             icon: Icon(Icons.notifications_none, color: primaryColor),
             onPressed: () {},
           ),
-          
         ],
         leading: const SizedBox(),
       ),
@@ -40,16 +40,16 @@ class ProfileScreen extends StatelessWidget {
           child: Column(
             crossAxisAlignment: CrossAxisAlignment.start,
             children: [
-              const SizedBox(
-                height: 15,
+              SizedBox(
+                height: MediaQueryUtils.getHeightPercentage(context, 0.018),
               ),
               const ProfileDetails(),
-              const SizedBox(
-                height: 5,
+              SizedBox(
+                height: MediaQueryUtils.getHeightPercentage(context, 0.008),
               ),
               const Divider(),
-              const SizedBox(
-                height: 5,
+              SizedBox(
+                height: MediaQueryUtils.getHeightPercentage(context, 0.008),
               ),
               Text(
                 'Car type',
@@ -58,12 +58,12 @@ class ProfileScreen extends StatelessWidget {
                     fontSize: 22,
                     fontWeight: FontWeight.bold),
               ),
-              const SizedBox(
-                height: 10,
+              SizedBox(
+                height: MediaQueryUtils.getHeightPercentage(context, 0.009),
               ),
               const ChangeCarType(),
-              const SizedBox(
-                height: 30,
+              SizedBox(
+                height: MediaQueryUtils.getHeightPercentage(context, 0.030),
               ),
               Text(
                 'Settings',
@@ -72,8 +72,8 @@ class ProfileScreen extends StatelessWidget {
                     fontSize: 22,
                     fontWeight: FontWeight.bold),
               ),
-              const SizedBox(
-                height: 10,
+              SizedBox(
+                height: MediaQueryUtils.getHeightPercentage(context, 0.008),
               ),
               Expanded(
                   child: ListView(children: [

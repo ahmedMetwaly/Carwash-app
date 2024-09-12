@@ -1,3 +1,4 @@
+import 'package:carwashapp/core/utils/media_query_utils.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import '../../../../core/constants/routes.dart';
@@ -15,10 +16,12 @@ class ChangeCarType extends StatelessWidget {
     return BlocBuilder<UserBloc, UserState>(
         builder: (BuildContext context, UserState state) => Card(
               child: ListTile(
-                minTileHeight: 75,
+                minTileHeight:
+                    MediaQueryUtils.getHeightPercentage(context, 0.085),
                 leading: Image.asset(
-                  getCarTypeImage(AuthenticationBloc.user.appointment!.carType!),
-                  width: 50,
+                  getCarTypeImage(
+                      AuthenticationBloc.user.appointment!.carType!),
+                  width: MediaQueryUtils.getHeightPercentage(context, 0.060),
                 ),
                 title: Text(AuthenticationBloc.user.appointment!.carType!),
                 trailing: ElevatedButton(
@@ -38,7 +41,7 @@ class ChangeCarType extends StatelessWidget {
   }
 }
 
-String carType =AuthenticationBloc.user.appointment!.carType!;
+String carType = AuthenticationBloc.user.appointment!.carType!;
 String getCarTypeImage(String carType) {
   if (carType == 'Micro') {
     return 'assets/images/Screenshot from 2024-09-09 21-36-25.png';
