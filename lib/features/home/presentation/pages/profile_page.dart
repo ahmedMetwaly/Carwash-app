@@ -2,6 +2,7 @@ import 'package:carwashapp/core/constants/routes.dart';
 import 'package:carwashapp/core/utils/values.dart';
 import 'package:carwashapp/features/auth/controller/auth_bloc/auth_events.dart';
 import 'package:carwashapp/features/auth/controller/auth_bloc/auth_states.dart';
+import 'package:carwashapp/features/home/presentation/pages/about_us_page.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import '../../../auth/controller/auth_bloc/auth_bloc.dart';
@@ -27,7 +28,7 @@ class ProfileScreen extends StatelessWidget {
           IconButton(
             icon: Icon(Icons.notifications_none, color: primaryColor),
             onPressed: () {},
-          ), 
+          ),
         ],
         leading: const SizedBox(),
       ),
@@ -103,7 +104,10 @@ class ProfileScreen extends StatelessWidget {
                   ),
                   title: 'about us',
                   onTap: () {
-                    Navigator.pushNamed(context, '/about');
+                    Navigator.push(
+                        context,
+                        MaterialPageRoute(
+                            builder: (context) => const AboutUsPage()));
                   },
                 ),
                 SettingsItem(
