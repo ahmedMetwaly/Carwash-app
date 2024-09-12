@@ -87,7 +87,7 @@ class _EditAppointmentScreenState extends State<EditAppointmentScreen> {
                     onTap: _pickDate,
                     decoration: InputDecoration(
                       prefixIcon: const Icon(Icons.calendar_today),
-                      labelText: _selectedDate ?? "Select Date",
+                      labelText: _selectedDate,
                       border: const OutlineInputBorder(),
                     ),
                   ),
@@ -99,7 +99,7 @@ class _EditAppointmentScreenState extends State<EditAppointmentScreen> {
                     onTap: _pickTime,
                     decoration: InputDecoration(
                       prefixIcon: const Icon(Icons.access_time),
-                      labelText: _selectedTime ?? "Select Time",
+                      labelText: _selectedTime ,
                       border: const OutlineInputBorder(),
                     ),
                   ),

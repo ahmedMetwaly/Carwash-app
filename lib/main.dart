@@ -1,3 +1,4 @@
+import 'package:carwashapp/core/Functions/update_cubit_functions.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_stripe/flutter_stripe.dart';
@@ -34,6 +35,7 @@ Stripe.publishableKey = StripeKeys.publishableKey;
     ),
     BlocProvider(create: (context) => UserBloc()),
     BlocProvider(create: (context) => AddressCubit()),
+    BlocProvider(create: (context) => DataCubit()),
    
   ], child: const MyApp()));
 }

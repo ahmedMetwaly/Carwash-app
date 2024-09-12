@@ -1,7 +1,10 @@
 import 'package:carwashapp/core/constants/colors_manager.dart';
 import 'package:carwashapp/features/home/presentation/pages/appointment_edit_screen.dart';
 import 'package:carwashapp/features/home/presentation/widgets/appointment_details_card.dart';
+import 'package:carwashapp/features/progress/checkout/check_out_screen.dart';
+import 'package:carwashapp/features/progress/progress/progress_tracker.dart';
 import 'package:flutter/material.dart';
+import 'package:progress_tracker/progress_tracker.dart';
 
 import '../../../../core/utils/media_query_utils.dart';
 import '../../../auth/controller/auth_bloc/auth_bloc.dart';
@@ -74,19 +77,25 @@ class ReceiptScreen extends StatelessWidget {
                 ),
                 onPressed: () {
                   // Handle edit appointment
-                  Navigator.push(
-                    context,
-                    MaterialPageRoute(
-                      builder: (context) => EditAppointmentScreen(
-                        initialDate: AuthenticationBloc.user.appointment!.date!,
-                        initialTime: AuthenticationBloc.user.appointment!.time!,
-                        initialLocation:
-                            AuthenticationBloc.user.address!.address!,
-                        initialPaymentMethod:
-                            AuthenticationBloc.user.appointment!.paymentMethod!,
-                      ),
-                    ),
-                  );
+                  Navigator.push(context,
+              MaterialPageRoute(builder: (context) => ProgressTrackerScreen(
+                title: title,
+                price:  AuthenticationBloc.user.appointment!.services!.price!,
+                isUpdate: true,
+              )));
+                  // Navigator.push(
+                  //   context,
+                  //   MaterialPageRoute(
+                  //     builder: (context) => EditAppointmentScreen(
+                  //       initialDate: AuthenticationBloc.user.appointment!.date!,
+                  //       initialTime: AuthenticationBloc.user.appointment!.time!,
+                  //       initialLocation:
+                  //           AuthenticationBloc.user.address!.address!,
+                  //       initialPaymentMethod:
+                  //           AuthenticationBloc.user.appointment!.paymentMethod!,
+                  //     ),
+                  //   ),
+                  // );
                 },
                 child: const Text(
                   'Edit Appointment',

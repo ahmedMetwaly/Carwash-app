@@ -1,3 +1,4 @@
+import 'package:carwashapp/features/progress/checkout/check_out_screen.dart';
 import 'package:flutter/material.dart';
 
 import '../../../auth/controller/auth_bloc/auth_bloc.dart';
@@ -17,13 +18,15 @@ class AppointmentItem extends StatelessWidget {
       color: Colors.white,
       child: ListTile(
         onTap: () {
+          
           Navigator.push(context,
               MaterialPageRoute(builder: (context) => const ReceiptScreen()));
         },
         contentPadding: const EdgeInsets.symmetric(horizontal: 10),
         minTileHeight: 90,
         leading: Image.asset(
-          getServicePlanImage(AuthenticationBloc.user.appointment!.services!.title!),
+          getServicePlanImage(
+              AuthenticationBloc.user.appointment!.services!.title!),
           fit: BoxFit.fitHeight,
         ),
         title: Text(

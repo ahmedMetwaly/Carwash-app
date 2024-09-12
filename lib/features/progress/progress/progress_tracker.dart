@@ -20,9 +20,10 @@ import 'widgets/custom_app_bar_widget.dart';
 
 class ProgressTrackerScreen extends StatefulWidget {
   const ProgressTrackerScreen(
-      {super.key, required this.title, required this.price});
+      {super.key, required this.title, required this.price,  this.isUpdate=false});
   final String title;
   final String price;
+  final bool isUpdate;
   @override
   State<ProgressTrackerScreen> createState() => _MyAppState();
 }
@@ -169,6 +170,7 @@ class _MyAppState extends State<ProgressTrackerScreen> {
                                 : CheckOutScreen(
                                     title: widget.title,
                                     price: widget.price,
+                                    isUpdate: widget.isUpdate,
                                   ),
                   ],
                 ),

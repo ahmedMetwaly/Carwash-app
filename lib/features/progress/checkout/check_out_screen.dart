@@ -14,15 +14,23 @@ import '../../home/presentation/pages/main_page.dart';
 import '../payment/stripe_payment/payment_manger.dart';
 
 class CheckOutScreen extends StatelessWidget {
-  const CheckOutScreen({super.key, required this.title, required this.price});
+  const CheckOutScreen(
+      {super.key,
+      required this.title,
+      required this.price,
+      this.isUpdate = false});
   final String title;
   final String price;
+  final bool? isUpdate;
 
   @override
   Widget build(BuildContext context) {
     final data = context.watch<DataCubit>().state;
     final Color primaryColor = Theme.of(context).colorScheme.primary;
     AuthenticationBloc.user.appointment!.services!.title = title;
+    AuthenticationBloc.user.appointment!.services!.price = price;
+
+
     return SizedBox(
       height: MediaQueryUtils.getHeightPercentage(context, 0.6),
       width: MediaQueryUtils.getScreenWidth(context),
@@ -154,29 +162,47 @@ class CheckOutScreen extends StatelessWidget {
                   child: AppTextButton(
                     buttonText: 'Book Now',
                     onPressed: () {
-                      if (data['screen4'] == "Credit") {
-                        PaymentManager.makePayment(int.parse(price), "EGP")
-                            .then((val) {
-                          context.read<UserBloc>().add(BookAppointementEvent());
-                          ScaffoldMessenger.of(context).showSnackBar(
-                          const SnackBar(content: Text('Booked Successfully')),
-                        );
-                          Navigator.pushReplacement(
-                            context,
-                            MaterialPageRoute(
-                              builder: (context) => const HomeScreenBody(),
-                            ),
-                          );
-                        });
-                      } else {
+                      if (isUpdate!) {
                         context.read<UserBloc>().add(BookAppointementEvent());
                         ScaffoldMessenger.of(context).showSnackBar(
-                          const SnackBar(content: Text('Booked Successfully')),
+                          const SnackBar(content: Text('Updated Successfully')),
                         );
                         Navigator.pushReplacement(
-                            context,
-                            MaterialPageRoute(
-                                builder: (context) => const HomeScreenBody()));
+                          context,
+                          MaterialPageRoute(
+                            builder: (context) => const HomeScreenBody(),
+                          ),
+                        );
+                      } else {
+                        if (data['screen4'] == "Credit") {
+                          PaymentManager.makePayment(int.parse(price), "EGP")
+                              .then((val) {
+                            context
+                                .read<UserBloc>()
+                                .add(BookAppointementEvent());
+                            ScaffoldMessenger.of(context).showSnackBar(
+                              const SnackBar(
+                                  content: Text('Booked Successfully')),
+                            );
+                            Navigator.pushReplacement(
+                              context,
+                              MaterialPageRoute(
+                                builder: (context) => const HomeScreenBody(),
+                              ),
+                            );
+                          });
+                        } else {
+                          context.read<UserBloc>().add(BookAppointementEvent());
+                          ScaffoldMessenger.of(context).showSnackBar(
+                            const SnackBar(
+                                content: Text('Booked Successfully')),
+                          );
+                          Navigator.pushReplacement(
+                              context,
+                              MaterialPageRoute(
+                                  builder: (context) =>
+                                      const HomeScreenBody()));
+                        }
                       }
                     },
                   ),
