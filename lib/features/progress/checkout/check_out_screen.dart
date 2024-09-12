@@ -42,8 +42,8 @@ class CheckOutScreen extends StatelessWidget {
                     color: primaryColor),
               ),
             ),
-            const SizedBox(
-              height: 20,
+            SizedBox(
+              height: MediaQueryUtils.getHeightPercentage(context, 0.018),
             ),
             const Divider(
               height: 1.2,
@@ -60,9 +60,11 @@ class CheckOutScreen extends StatelessWidget {
                     AuthenticationBloc.user.appointment!.paymentMethod!,
               ),
             ),
-            const Gap(10),
             SizedBox(
-              height: 150,
+              height: MediaQueryUtils.getHeightPercentage(context, 0.008),
+            ),
+            SizedBox(
+              height: MediaQueryUtils.getHeightPercentage(context, 0.14),
               child: Column(
                 crossAxisAlignment: CrossAxisAlignment.start,
                 children: [
@@ -85,7 +87,9 @@ class CheckOutScreen extends StatelessWidget {
                       ),
                     ],
                   ),
-                  const Gap(10),
+                  SizedBox(
+                    height: MediaQueryUtils.getHeightPercentage(context, 0.008),
+                  ),
                   Row(
                     mainAxisAlignment: MainAxisAlignment.spaceBetween,
                     children: [
@@ -105,12 +109,17 @@ class CheckOutScreen extends StatelessWidget {
                       ),
                     ],
                   ),
+                  SizedBox(
+                    height: MediaQueryUtils.getHeightPercentage(context, 0.008),
+                  ),
                   const Divider(
                     height: 2,
                     color: Colors.grey,
                     thickness: 1.5,
                   ),
-                  const Gap(10),
+                  SizedBox(
+                    height: MediaQueryUtils.getHeightPercentage(context, 0.008),
+                  ),
                   Row(
                     mainAxisAlignment: MainAxisAlignment.spaceBetween,
                     children: [
@@ -133,8 +142,10 @@ class CheckOutScreen extends StatelessWidget {
                 ],
               ),
             ),
-            const Gap(15),
-        
+            SizedBox(
+              height: MediaQueryUtils.getHeightPercentage(context, 0.02),
+            ),
+
             // data['screen4'] == "Credit"?
             BlocBuilder<UserBloc, UserState>(
               builder: (context, state) {

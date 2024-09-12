@@ -37,8 +37,8 @@ class _DateAndTimeScreenState extends State<DateAndTimeScreen> {
                     fontSize: 20,
                     fontWeight: FontWeight.bold),
               )),
-          const SizedBox(
-            height: 30,
+          SizedBox(
+            height: MediaQueryUtils.getHeightPercentage(context, 0.030),
           ),
           Container(
             decoration: BoxDecoration(border: Border.all(color: Colors.black)),
@@ -50,8 +50,8 @@ class _DateAndTimeScreenState extends State<DateAndTimeScreen> {
                 formatAnimationCurve: Curves.easeIn,
                 calendarStyle: CalendarStyle(
                   // Customize the day cells
-                  defaultTextStyle: TextStyle(color: Colors.black),
-                  weekendTextStyle: TextStyle(color: Colors.red),
+                  defaultTextStyle: const TextStyle(color: Colors.black),
+                  weekendTextStyle: const TextStyle(color: Colors.red),
                   selectedDecoration: BoxDecoration(
                     color: primaryColor,
                     shape: BoxShape.circle,
@@ -90,7 +90,9 @@ class _DateAndTimeScreenState extends State<DateAndTimeScreen> {
                   }
                 }),
           ),
-          const Gap(20),
+          SizedBox(
+            height: MediaQueryUtils.getHeightPercentage(context, 0.020),
+          ),
           const ChoiceChips(),
         ],
       ),

@@ -97,7 +97,7 @@ class _MyAppState extends State<ProgressTrackerScreen> {
               bottomNavigationBar: btnWidget(),
               body: SingleChildScrollView(
                 scrollDirection: Axis.vertical,
-                physics: const BouncingScrollPhysics(),
+                physics: const NeverScrollableScrollPhysics(),
                 child: Column(
                   children: [
                     CustomAppBar(
@@ -109,7 +109,8 @@ class _MyAppState extends State<ProgressTrackerScreen> {
                                   ? "payment"
                                   : "checkout",
                       title: widget.title,
-                      // height: MediaQueryUtils.getHeightPercentage(context, percentage),
+                      height:
+                          MediaQueryUtils.getHeightPercentage(context, 0.16),
                     ),
                     Padding(
                       padding: const EdgeInsets.only(top: 8),
@@ -122,7 +123,10 @@ class _MyAppState extends State<ProgressTrackerScreen> {
                           // Optional: Customize the color for inactive steps (default: Colors.grey).
                           ),
                     ),
-                    const SizedBox(height: 10),
+                    SizedBox(
+                      height:
+                          MediaQueryUtils.getHeightPercentage(context, 0.010),
+                    ),
                     index == 0
                         ? const Padding(
                             padding: EdgeInsets.all(8.0),
@@ -134,12 +138,22 @@ class _MyAppState extends State<ProgressTrackerScreen> {
                                     PaddingManager.pMainPadding),
                                 child: Column(
                                   children: [
-                                    const SizedBox(height: 70),
+                                    SizedBox(
+                                      height:
+                                          MediaQueryUtils.getHeightPercentage(
+                                              context, 0.10),
+                                    ),
                                     Image.asset(
                                       "assets/images/map_image.jpeg",
-                                      height: 150,
+                                      height:
+                                          MediaQueryUtils.getHeightPercentage(
+                                              context, 0.18),
                                     ),
-                                    const SizedBox(height: 50),
+                                    SizedBox(
+                                      height:
+                                          MediaQueryUtils.getHeightPercentage(
+                                              context, 0.10),
+                                    ),
                                     MyElevatedButton(
                                         title: "Select your location",
                                         onPress: () => Navigator.of(context)
