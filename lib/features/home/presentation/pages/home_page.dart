@@ -1,17 +1,18 @@
-import 'package:carwashapp/features/auth/controller/auth_bloc/auth_bloc.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter_screenutil/flutter_screenutil.dart';
+import '../../../../core/constants/colors_manager.dart';
 import '../../../../core/utils/values.dart';
 import '../../../../generated/l10n.dart';
+import '../../../auth/controller/auth_bloc/auth_bloc.dart';
 import '../../data/models/services_model.dart';
 import '../widgets/appointment_item.dart';
 import '../widgets/services_item.dart';
 
-class HomePage extends StatelessWidget {
-  const HomePage({super.key});
+class HomeScreen extends StatelessWidget {
+  const HomeScreen({super.key});
 
   @override
   Widget build(BuildContext context) {
-    final Color primaryColor = Theme.of(context).colorScheme.primary;
     return SafeArea(
       child: Padding(
         padding: const EdgeInsets.symmetric(
@@ -19,15 +20,15 @@ class HomePage extends StatelessWidget {
         child: Column(
           crossAxisAlignment: CrossAxisAlignment.start,
           children: [
-            const SizedBox(height: 15),
+            SizedBox(height: 10.h),
             Row(
               children: [
                 Column(
                   children: [
                     Text(
                       "${S.current.goodMorning} ${AuthenticationBloc.user.name!}",
-                      style: const TextStyle(
-                        fontSize: 18,
+                      style: TextStyle(
+                        fontSize: 15.sp,
                         fontWeight: FontWeight.w300,
                         color: Colors.black54,
                       ),
@@ -36,8 +37,8 @@ class HomePage extends StatelessWidget {
                 ),
                 const Spacer(),
                 IconButton(
-                  icon: Icon(Icons.notifications_none,
-                      size: 32, color: primaryColor),
+                  icon: const Icon(Icons.notifications_none,
+                      size: 32, color: ColorsManager.primary),
                   onPressed: () {},
                 ),
               ],
@@ -45,18 +46,18 @@ class HomePage extends StatelessWidget {
             Text(
               'A clean car is a Happy Car!',
               style: TextStyle(
-                  fontSize: 32,
+                  fontSize: 26.sp,
                   fontWeight: FontWeight.bold,
-                  color: primaryColor),
+                  color: ColorsManager.primary),
             ),
-            const SizedBox(height: 24),
-            const Text(
+            SizedBox(height: 20.h),
+            Text(
               'We offer a wide range of services at your convenience ...',
-              style: TextStyle(fontSize: 16, color: Colors.black54),
+              style: TextStyle(fontSize: 14.sp, color: Colors.black54),
             ),
-            const SizedBox(height: 15),
+            SizedBox(height: 10.h),
             SizedBox(
-              height: 70,
+              height: 60.h,
               child: ListView.builder(
                 scrollDirection: Axis.horizontal,
                 padding: EdgeInsets.zero,
@@ -65,11 +66,11 @@ class HomePage extends StatelessWidget {
                     ServicesItem(servicesItem: servicesList[index]),
               ),
             ),
-            const SizedBox(height: 24),
-            const Text(
+            SizedBox(height: 10.h),
+            Text(
               'Your Appointment',
               style: TextStyle(
-                fontSize: 18,
+                fontSize: 15.sp,
               ),
             ),
             Expanded(

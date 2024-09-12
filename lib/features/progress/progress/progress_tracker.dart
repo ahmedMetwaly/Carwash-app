@@ -6,31 +6,35 @@ import 'package:carwashapp/features/auth/controller/user_bloc/user_state.dart';
 import 'package:carwashapp/features/home/presentation/pages/main_page.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:flutter_screenutil/flutter_screenutil.dart';
+import 'package:gap/gap.dart';
 import 'package:progress_tracker/progress_tracker.dart';
 
 import '../../../core/Functions/update_cubit_functions.dart';
 import '../../../core/utils/media_query_utils.dart';
-import '../../../core/widgets/custom_btn.dart';
 
+import '../../../core/widgets/custom_button.dart';
 import '../../auth/presentation/pages/signup/presentation/widgets/google_maps.dart';
 import '../checkout/check_out_screen.dart';
 import '../date and time/date_time_widget.dart';
 import '../payment/payment_screen.dart';
-import 'widgets/custom_app_bar_widget.dart';
+import '../../../core/widgets/custom_app_bar.dart';
 
 class ProgressTrackerScreen extends StatefulWidget {
-  const ProgressTrackerScreen({super.key});
-
+  const ProgressTrackerScreen(
+      {super.key, required this.servicePlan, required this.price});
+  final String servicePlan;
+  final String price;
   @override
   State<ProgressTrackerScreen> createState() => _MyAppState();
 }
 
 class _MyAppState extends State<ProgressTrackerScreen> {
-  final List<Status> statuList = [
-    Status(name: 'Date and time', icon: Icons.date_range_rounded),
-    Status(name: 'Location', icon: Icons.location_on_rounded),
+  final List<Status> statusList = [
+    Status(name: 'Date \nand time', icon: Icons.date_range_rounded),
+    Status(name: 'Location\n          ', icon: Icons.location_on_rounded),
     Status(name: ' payment \nmethod', icon: Icons.payment_outlined),
-    Status(name: 'check out', icon: Icons.check_circle),
+    Status(name: 'check out\n          ', icon: Icons.check_circle),
   ];
 
   int index = 0;
@@ -38,47 +42,63 @@ class _MyAppState extends State<ProgressTrackerScreen> {
   void nextButton() {
     setState(() {
       index++;
-      statuList[index].active = true;
+      statusList[index].active = true;
     });
   }
 
   void backButton() {
     setState(() {
       index--;
-      statuList[index].active = true;
+      statusList[index].active = true;
     });
   }
 
   Widget btnWidget() {
     return Padding(
       padding: const EdgeInsets.all(8.0),
-      child: Row(
-        mainAxisAlignment: MainAxisAlignment.spaceBetween,
+      child: Column(
+        mainAxisSize: MainAxisSize.min,
         children: [
-          SizedBox(
-            height: MediaQueryUtils.getHeightPercentage(context, 0.06),
-            width: MediaQueryUtils.getWidthPercentage(context, 0.4),
-            child: AppTextButton(
-                buttonText: "back",
-                onPressed: () =>
-                    index == 0 ? Navigator.pop(context) : backButton()),
+          const Divider(
+            height: 1.2,
+            thickness: 2,
+            color: Colors.grey,
           ),
-          SizedBox(
-            height: MediaQueryUtils.getHeightPercentage(context, 0.06),
-            width: MediaQueryUtils.getWidthPercentage(context, 0.4),
-            child: BlocBuilder<UserBloc,UserState>(
-              builder: (BuildContext context, UserState state) =>
-               AppTextButton(
-                  buttonText: index == 3 ? 'booked' : "Next",
-                  onPressed: () => index == 3
-                      ? {
-                        context.read<UserBloc>().add(BookAppointementEvent()),
-                        Navigator.push(
-                          context,
-                          MaterialPageRoute(
-                              builder: (context) => const HomeScreenBody()))}
-                      : nextButton()),
-            ),
+          const Gap(5),
+          Row(
+            mainAxisAlignment: MainAxisAlignment.spaceBetween,
+            children: [
+              SizedBox(
+                height: MediaQueryUtils.getHeightPercentage(context, 0.058),
+                width: MediaQueryUtils.getWidthPercentage(context, 0.4),
+                child: CustomButton(
+                    text: "back",
+                    onPressed: () =>
+                        index == 0 ? Navigator.pop(context) : backButton()),
+              ),
+              SizedBox(
+                height: MediaQueryUtils.getHeightPercentage(context, 0.06),
+                width: MediaQueryUtils.getWidthPercentage(context, 0.4),
+                child: BlocBuilder<UserBloc, UserState>(
+                  builder: (context, state) {
+                    return CustomButton(
+                        text: index == 3 ? 'booked' : "Next",
+                        onPressed: () => index == 3
+                            ? {
+                                context
+                                    .read<UserBloc>()
+                                    .add(BookAppointementEvent()),
+                                Navigator.push(
+                                    context,
+                                    MaterialPageRoute(
+                                        builder: (context) =>
+                                            const HomeScreenBody()))
+                              }
+                            : nextButton());
+                  },
+                ),
+              ),
+            ],
           ),
         ],
       ),
@@ -95,25 +115,28 @@ class _MyAppState extends State<ProgressTrackerScreen> {
           height: MediaQueryUtils.getHeightPercentage(context, 0.6),
           child: SafeArea(
             child: Scaffold(
+              bottomNavigationBar: btnWidget(),
               body: SingleChildScrollView(
                 scrollDirection: Axis.vertical,
                 physics: const BouncingScrollPhysics(),
                 child: Column(
                   children: [
                     CustomAppBar(
-                      text: index == 0
+                      text1:widget.servicePlan,
+                      text2: index == 0
                           ? "Date and time"
                           : index == 1
                               ? "Location"
                               : index == 2
                                   ? "payment"
                                   : "checkout",
+                      height: 145.h,
                     ),
                     Padding(
                       padding: const EdgeInsets.only(top: 8),
                       child: ProgressTracker(
                           currentIndex: index,
-                          statusList: statuList,
+                          statusList: statusList,
                           activeColor: Theme.of(context).colorScheme.primary,
                           // Optional: Customize the color for active steps (default: Colors.green).
                           inActiveColor: Colors.grey
@@ -149,16 +172,10 @@ class _MyAppState extends State<ProgressTrackerScreen> {
                             : index == 2
                                 ? const PaymentScreen()
                                 // : index == 3
-                                : const CheckOutScreen(),
+                                :  CheckOutScreen(
+                                  price: widget.price,
+                                ),
                     // : const Text("DONE"),
-                    const Divider(
-                      height: 1.2,
-                      thickness: 2,
-                      color: Colors.grey,
-                    ),
-                    SizedBox(
-                      child: btnWidget(),
-                    ),
                   ],
                 ),
               ),

@@ -37,7 +37,7 @@ class RoutesGeneratour {
         return MaterialPageRoute(
             builder: (_) => const ProfileScreen(), settings: route);
       case Routes.home:
-        return MaterialPageRoute(builder: (_) => const HomePage());
+        return MaterialPageRoute(builder: (_) => const HomeScreen());
       case Routes.homeScreen:
         return MaterialPageRoute(builder: (_) => const HomeScreenBody());
       case Routes.pickCar:

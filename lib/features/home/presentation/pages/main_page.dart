@@ -14,7 +14,7 @@ class HomeScreenBody extends StatefulWidget {
 }
 
 List<Widget> screens = const [
-  HomePage(),
+  HomeScreen(),
   ServicesPage(),
   ProfileScreen(),
 ];

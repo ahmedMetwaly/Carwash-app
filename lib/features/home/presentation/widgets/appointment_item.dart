@@ -12,13 +12,13 @@ class AppointmentItem extends StatelessWidget {
 
     return Card(
       shadowColor: primaryColor,
-      color: Theme.of(context).colorScheme.outline,
+      color: Colors.white,
       child: ListTile(
         onTap: (){},
         contentPadding: const EdgeInsets.symmetric(horizontal: 10),
         minTileHeight: 80,
         leading: Image.asset(
-          'assets/images/مغسلة-سيارات-العباسية-.jpg',
+          'assets/images/Standard.png',
           fit: BoxFit.fitHeight,
         ),
         title: const Text(

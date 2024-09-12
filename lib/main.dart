@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
-//import 'package:flutter_stripe/flutter_stripe.dart';
+import 'package:flutter_stripe/flutter_stripe.dart';
 import 'package:firebase_core/firebase_core.dart';
 import 'core/constants/router.dart';
 import 'core/constants/routes.dart';
@@ -14,9 +14,12 @@ import 'features/auth/controller/user_bloc/user_bloc.dart';
 import 'firebase_options.dart';
 import 'generated/l10n.dart';
 import 'package:flutter_localizations/flutter_localizations.dart';
+import 'core/constants/stripe_keys.dart';
+import 'package:flutter_screenutil/flutter_screenutil.dart';
 
 void main() async {
   WidgetsFlutterBinding.ensureInitialized();
+  Stripe.publishableKey = StripeKeys.publishableKey;
 
   await Firebase.initializeApp(options: DefaultFirebaseOptions.currentPlatform);
   // await FirebaseAppCheck.instance.activate(); // Ensure activation.
@@ -32,7 +35,6 @@ void main() async {
     ),
     BlocProvider(create: (context) => UserBloc()),
     BlocProvider(create: (context) => AddressCubit()),
-   
   ], child: const MyApp()));
 }
 
@@ -42,21 +44,28 @@ class MyApp extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return BlocBuilder<SharedPrefBloc, SettingsStates>(
-      builder: (BuildContext context, SettingsStates state) => MaterialApp(
-        debugShowCheckedModeBanner: false,
-        locale: Locale(context.read<SharedPrefBloc>().lang),
-        localizationsDelegates: const [
-          S.delegate,
-          GlobalMaterialLocalizations.delegate,
-          GlobalWidgetsLocalizations.delegate,
-          GlobalCupertinoLocalizations.delegate,
-        ],
-        supportedLocales: S.delegate.supportedLocales,
-        title: 'carwash',
-        theme: ThemeManager.lightTheme,
-        initialRoute: Routes.splashScreen,
-        onGenerateRoute: (settings) => RoutesGeneratour.getRoute(settings),
-      ),
+      builder: (BuildContext context, SettingsStates state) => ScreenUtilInit(
+          designSize: const Size(360, 690),
+          minTextAdapt: true,
+          splitScreenMode: true,
+          builder: (_, child) {
+            return MaterialApp(
+              debugShowCheckedModeBanner: false,
+              locale: Locale(context.read<SharedPrefBloc>().lang),
+              localizationsDelegates: const [
+                S.delegate,
+                GlobalMaterialLocalizations.delegate,
+                GlobalWidgetsLocalizations.delegate,
+                GlobalCupertinoLocalizations.delegate,
+              ],
+              supportedLocales: S.delegate.supportedLocales,
+              title: 'carwash',
+              theme: ThemeManager.lightTheme,
+              initialRoute: Routes.splashScreen,
+              onGenerateRoute: (settings) =>
+                  RoutesGeneratour.getRoute(settings),
+            );
+          }),
     );
   }
 }

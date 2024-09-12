@@ -1,17 +1,17 @@
-
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:gap/gap.dart';
 
 import '../../../core/Functions/update_cubit_functions.dart';
 import '../../../core/utils/media_query_utils.dart';
-import '../../../core/widgets/custom_btn.dart';
+import '../../../core/widgets/custom_button.dart';
 import '../../auth/controller/auth_bloc/auth_bloc.dart';
 import '../payment/stripe_payment/payment_manger.dart';
 import 'widgets/custom_row.dart';
 
 class CheckOutScreen extends StatelessWidget {
-  const CheckOutScreen({super.key});
+  const CheckOutScreen({super.key, required this.price});
+  final String price;
 
   @override
   Widget build(BuildContext context) {
@@ -25,7 +25,7 @@ class CheckOutScreen extends StatelessWidget {
         mainAxisAlignment: MainAxisAlignment.start,
         crossAxisAlignment: CrossAxisAlignment.start,
         children: [
-           Align(
+          Align(
             alignment: Alignment.topLeft,
             child: Text(
               " Standard wash",
@@ -51,9 +51,11 @@ class CheckOutScreen extends StatelessWidget {
                 children: [
                   CustomDataView(
                     icon: Icons.date_range_sharp,
-                    dataText2:AuthenticationBloc.user.appointement?.date?? 'No data',
+                    dataText2:
+                        AuthenticationBloc.user.appointement?.date ?? 'No data',
                     title: "Date and time :",
-                    dataText:AuthenticationBloc.user.appointement?.time ?? 'No data',
+                    dataText:
+                        AuthenticationBloc.user.appointement?.time ?? 'No data',
                   ),
                   const Gap(20),
                   SingleChildScrollView(
@@ -62,7 +64,8 @@ class CheckOutScreen extends StatelessWidget {
                       icon: Icons.location_on_sharp,
                       dataText2: "",
                       title: "Location :",
-                      dataText: AuthenticationBloc.user.address!.address ?? 'No data',
+                      dataText:
+                          AuthenticationBloc.user.address!.address ?? 'No data',
                     ),
                   ),
                   const Gap(20),
@@ -77,7 +80,7 @@ class CheckOutScreen extends StatelessWidget {
             ),
           ),
           const Gap(10),
-           SizedBox(
+          SizedBox(
             height: 150,
             child: Column(
               crossAxisAlignment: CrossAxisAlignment.start,
@@ -151,12 +154,19 @@ class CheckOutScreen extends StatelessWidget {
           ),
           const Gap(30),
           data['screen4'] == "Credit"
-              ? AppTextButton(
-                  buttonText: '100',
+              ? CustomButton(
                   onPressed: () {
-                    PaymentManager.makePayment(100, "EGP");
+                    PaymentManager.makePayment(int.parse(price), "EGP");
                   },
+                  text: '$price EGP',
                 )
+
+              // AppTextButton(
+              //     buttonText: '100',
+              //     onPressed: () {
+              //       PaymentManager.makePayment(100, "EGP");
+              //     },
+              //   )
               : const SizedBox()
         ],
       ),

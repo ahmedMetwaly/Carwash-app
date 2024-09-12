@@ -29,3 +29,53 @@ List<ServicesModel> servicesList = [
       ServicesModel(
       icon: 'assets/images/car-servicesl.png', title: 'Car Wash'),
 ];
+
+class ServicesPlan {
+  final String title;
+  final List<String> services;
+  final String price;
+
+  ServicesPlan({
+    required this.title,
+    required this.services,
+    required this.price,
+  });
+}
+
+Map<String, List<String>> plans = {
+  'Standard': [
+    'Exterior Wash',
+    'Vacuuming',
+    'Tyre Cleaning',
+    'Hand Drying',
+  ],
+  'Deluxe': [
+    'Standard Wash',
+    'Tyre Cleaning',
+    'Engine Detailing',
+    'Hand Waxing',
+  ],
+  'Premium': [
+    'Deluxe Wash',
+    'Full Detailing',
+    'Deep Cleaning',
+    'Headlight Restoration',
+  ],
+};
+List<ServicesPlan> servicePlan = [
+  ServicesPlan(
+    title: 'Standard Wash',
+    services: plans['Standard']!,
+    price: '500',
+  ),
+  ServicesPlan(
+    title: 'Deluxe Wash',
+    services: plans['Deluxe']!,
+    price: '1000',
+  ),
+  ServicesPlan(
+    title: 'Premium Wash',
+    services: plans['Premium']!,
+    price: '1500',
+  ),
+];

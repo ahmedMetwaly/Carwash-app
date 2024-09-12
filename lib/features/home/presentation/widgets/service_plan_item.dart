@@ -1,27 +1,32 @@
+import 'package:carwashapp/core/constants/colors_manager.dart';
+import 'package:carwashapp/features/home/data/models/services_model.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter_screenutil/flutter_screenutil.dart';
+import 'package:gap/gap.dart';
 
 
 class ServicePlanItem extends StatelessWidget {
   const ServicePlanItem(
       {super.key,
       required this.servicePlan,
-      required this.icon,
-      required this.isSelected, required this.price});
-  final String servicePlan;
-  final Icon icon;
+      required this.img,
+      required this.isSelected,
+      required this.price});
+  // final String servicePlan;
+  final String img;
   final bool isSelected;
   final String price;
+  final ServicesPlan servicePlan;
 
   @override
   Widget build(BuildContext context) {
-        final Color primaryColor = Theme.of(context).colorScheme.primary;
-
     return Card(
-      shadowColor: primaryColor,
+      color: Colors.white,
+      shadowColor: ColorsManager.primary,
       shape: RoundedRectangleBorder(
         borderRadius: BorderRadius.circular(10),
         side: BorderSide(
-          color: isSelected ? primaryColor : Colors.transparent,
+          color: isSelected ? ColorsManager.primary : Colors.transparent,
         ),
       ),
       margin: const EdgeInsets.all(10),
@@ -34,57 +39,81 @@ class ServicePlanItem extends StatelessWidget {
               children: [
                 Row(
                   children: [
-                    icon,
-                    const SizedBox(
-                      width: 15,
+                    Image.asset(
+                      img,
+                      height: 45.h,
+                    ),
+                     SizedBox(
+                      width: 10.w,
                     ),
                     Text(
-                      servicePlan,
-                      style: const TextStyle(
-                          fontSize: 20, fontWeight: FontWeight.bold),
+                      servicePlan.title,
+                      style:  TextStyle(
+                          fontSize: 17.sp, fontWeight: FontWeight.bold),
                     ),
                   ],
                 ),
-                const SizedBox(
-                  height: 10,
+                 SizedBox(
+                  height: 10.h,
                 ),
-                 Column(
+                Column(
+                  crossAxisAlignment: CrossAxisAlignment.start,
                   children: [
                     Row(
                       children: [
-                        Icon(
+                        const Icon(
                           Icons.check_circle,
-                          color: primaryColor,
+                          color: ColorsManager.primary,
                         ),
-                      const  Text('Exterior wash'),
-                        const SizedBox(
-                          width: 10,
+                        Text(
+                          servicePlan.services[0],
+                          style:  TextStyle(
+                            fontSize: 9.sp,
+                            fontWeight: FontWeight.w700,
+                          ),
                         ),
-                        Icon(
+                        const Gap(5),
+                        const Icon(
                           Icons.check_circle,
-                          color: primaryColor,
+                          color: ColorsManager.primary,
                         ),
-                     const   Text('Exterior wash'),
+                        Text(
+                          servicePlan.services[1],
+                          style:  TextStyle(
+                            fontSize: 9.sp,
+                            fontWeight: FontWeight.w700,
+                          ),
+                        ),
                       ],
                     ),
-                const    SizedBox(
-                      height: 5,
+                     SizedBox(
+                      height: 5.h,
                     ),
                     Row(
                       children: [
-                        Icon(
+                        const Icon(
                           Icons.check_circle,
-                          color: primaryColor,
+                          color: ColorsManager.primary,
                         ),
-                        Text('Exterior wash'),
-                        SizedBox(
-                          width: 10,
+                        Text(
+                          servicePlan.services[2],
+                          style:  TextStyle(
+                            fontSize: 9.sp,
+                            fontWeight: FontWeight.w700,
+                          ),
                         ),
-                        Icon(
+                         Gap(5.w),
+                        const Icon(
                           Icons.check_circle,
-                          color: primaryColor,
+                          color: ColorsManager.primary,
                         ),
-                        Text('Exterior wash'),
+                        Text(
+                          servicePlan.services[3],
+                          style:  TextStyle(
+                            fontSize: 9.sp,
+                            fontWeight: FontWeight.w700,
+                          ),
+                        ),
                       ],
                     ),
                   ],
@@ -92,10 +121,15 @@ class ServicePlanItem extends StatelessWidget {
               ],
             ),
             const Spacer(),
-            Text(price),
+            Text(
+              '$price EGP',
+              style: const TextStyle(
+                  fontWeight: FontWeight.w500, color: ColorsManager.primary),
+            ),
+             Gap(5.w),
             Icon(
               isSelected ? Icons.radio_button_checked : Icons.radio_button_off,
-              color: primaryColor,
+              color: ColorsManager.primary,
             )
           ],
         ),

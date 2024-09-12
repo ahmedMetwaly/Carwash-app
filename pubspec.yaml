@@ -61,6 +61,7 @@ dependencies:
   gap: ^3.0.1
   dio: ^5.7.0
   progress_tracker: ^0.0.9
+  flutter_screenutil: ^5.9.3
 
 dev_dependencies:
   flutter_test:
