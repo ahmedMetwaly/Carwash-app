@@ -60,24 +60,21 @@ class _MyAppState extends State<ProgressTrackerScreen> {
             width: MediaQueryUtils.getWidthPercentage(context, 0.4),
             child: AppTextButton(
                 buttonText: "back",
-                onPressed: () =>
-                    index == 0 ? Navigator.pop(context) : backButton()),
+                onPressed: () => index == 0
+                    ? Navigator.pushReplacement(
+                        context,
+                        MaterialPageRoute(
+                            builder: (context) => const HomeScreenBody()))
+                    : backButton()),
           ),
           SizedBox(
             height: MediaQueryUtils.getHeightPercentage(context, 0.06),
             width: MediaQueryUtils.getWidthPercentage(context, 0.4),
-            child: BlocBuilder<UserBloc,UserState>(
-              builder: (BuildContext context, UserState state) =>
-               AppTextButton(
-                  buttonText: index == 3 ? 'booked' : "Next",
-                  onPressed: () => index == 3
-                      ? {
-                        context.read<UserBloc>().add(BookAppointementEvent()),
-                        Navigator.push(
-                          context,
-                          MaterialPageRoute(
-                              builder: (context) => const HomeScreenBody()))}
-                      : nextButton()),
+            child: BlocBuilder<UserBloc, UserState>(
+              builder: (BuildContext context, UserState state) => index == 3
+                  ? const SizedBox()
+                  : AppTextButton(
+                      buttonText: "Next", onPressed: () => nextButton()),
             ),
           ),
         ],
@@ -95,6 +92,7 @@ class _MyAppState extends State<ProgressTrackerScreen> {
           height: MediaQueryUtils.getHeightPercentage(context, 0.6),
           child: SafeArea(
             child: Scaffold(
+              bottomNavigationBar: btnWidget(),
               body: SingleChildScrollView(
                 scrollDirection: Axis.vertical,
                 physics: const BouncingScrollPhysics(),
@@ -151,14 +149,14 @@ class _MyAppState extends State<ProgressTrackerScreen> {
                                 // : index == 3
                                 : const CheckOutScreen(),
                     // : const Text("DONE"),
-                    const Divider(
-                      height: 1.2,
-                      thickness: 2,
-                      color: Colors.grey,
-                    ),
-                    SizedBox(
-                      child: btnWidget(),
-                    ),
+                    // const Divider(
+                    //   height: 1.2,
+                    //   thickness: 2,
+                    //   color: Colors.grey,
+                    // ),
+                    // SizedBox(
+                    //   child: btnWidget(),
+                    // ),
                   ],
                 ),
               ),

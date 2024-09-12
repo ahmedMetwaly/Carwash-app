@@ -7,6 +7,10 @@ import '../../../core/Functions/update_cubit_functions.dart';
 import '../../../core/utils/media_query_utils.dart';
 import '../../../core/widgets/custom_btn.dart';
 import '../../auth/controller/auth_bloc/auth_bloc.dart';
+import '../../auth/controller/user_bloc/user_bloc.dart';
+import '../../auth/controller/user_bloc/user_event.dart';
+import '../../auth/controller/user_bloc/user_state.dart';
+import '../../home/presentation/pages/main_page.dart';
 import '../payment/stripe_payment/payment_manger.dart';
 import 'widgets/custom_row.dart';
 
@@ -150,14 +154,35 @@ class CheckOutScreen extends StatelessWidget {
             ),
           ),
           const Gap(30),
-          data['screen4'] == "Credit"
-              ? AppTextButton(
-                  buttonText: '100',
-                  onPressed: () {
-                    PaymentManager.makePayment(100, "EGP");
-                  },
-                )
-              : const SizedBox()
+          
+          // data['screen4'] == "Credit"?
+          BlocBuilder<UserBloc, UserState>(
+            builder: (context, state) {
+              return AppTextButton(
+                buttonText: 'Book Now',
+                onPressed: () {
+                  if (data['screen4'] == "Credit") {
+                    PaymentManager.makePayment(100, "EGP").then((val) {
+                      context.read<UserBloc>().add(BookAppointementEvent());
+                      Navigator.pushReplacement(
+                        context,
+                        MaterialPageRoute(
+                          builder: (context) => const HomeScreenBody(),
+                        ),
+                      );
+                    });
+                  } else {
+                    context.read<UserBloc>().add(BookAppointementEvent());
+                    Navigator.pushReplacement(
+                        context,
+                        MaterialPageRoute(
+                            builder: (context) => const HomeScreenBody()));
+                  }
+                },
+              );
+            },
+          )
+          // : const SizedBox()
         ],
       ),
     );

@@ -1,9 +1,10 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
-//import 'package:flutter_stripe/flutter_stripe.dart';
+import 'package:flutter_stripe/flutter_stripe.dart';
 import 'package:firebase_core/firebase_core.dart';
 import 'core/constants/router.dart';
 import 'core/constants/routes.dart';
+import 'core/constants/stripe_keys.dart';
 import 'core/constants/theme_manager.dart';
 import 'features/auth/controller/address_cubit/address_cubit.dart';
 import 'features/auth/controller/auth_bloc/auth_bloc.dart';
@@ -17,6 +18,7 @@ import 'package:flutter_localizations/flutter_localizations.dart';
 
 void main() async {
   WidgetsFlutterBinding.ensureInitialized();
+Stripe.publishableKey = StripeKeys.publishableKey;
 
   await Firebase.initializeApp(options: DefaultFirebaseOptions.currentPlatform);
   // await FirebaseAppCheck.instance.activate(); // Ensure activation.

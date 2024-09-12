@@ -1,6 +1,8 @@
 import 'package:dio/dio.dart';
 import 'package:flutter_stripe/flutter_stripe.dart';
 
+import '../../../../core/constants/stripe_keys.dart';
+
 //import '../../../../core/constants/stripe_keys.dart';
 
 abstract class PaymentManager {
@@ -31,7 +33,7 @@ abstract class PaymentManager {
       'https://api.stripe.com/v1/payment_intents',
       options: Options(
         headers: {
-         // 'Authorization': 'Bearer ${StripeKeys.secretKey}',
+         'Authorization': 'Bearer ${StripeKeys.secretKey}',
           'Content-Type': 'application/x-www-form-urlencoded'
         },
       ),

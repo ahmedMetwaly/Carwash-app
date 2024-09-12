@@ -31,6 +31,7 @@ class _ServicesPageState extends State<ServicesPage> {
             onPressed: () {},
           ),
         ],
+        leading: const SizedBox(),
       ),
       body: Column(
         children: [

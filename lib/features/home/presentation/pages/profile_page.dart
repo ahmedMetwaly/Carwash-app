@@ -29,6 +29,7 @@ class ProfileScreen extends StatelessWidget {
             onPressed: () {},
           ), 
         ],
+        leading: const SizedBox(),
       ),
       body: BlocConsumer<AuthenticationBloc, AuthenticationStates>(
         builder: (BuildContext context, AuthenticationStates state) => Padding(
