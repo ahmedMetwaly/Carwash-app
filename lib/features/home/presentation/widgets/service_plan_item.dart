@@ -112,7 +112,7 @@ class ServicePlanItem extends StatelessWidget {
             ),
             const Spacer(),
             Text(
-              "$price\$",
+              "$price EGP",
               style: const TextStyle(
                 fontWeight: FontWeight.bold,
                 fontSize: 15,
