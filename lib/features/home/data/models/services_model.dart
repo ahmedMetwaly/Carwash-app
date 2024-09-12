@@ -54,23 +54,23 @@ Map<String, List<String>> plans = {
     'Deluxe Wash',
     'Full Detailing',
     'Deep Cleaning',
-    'Headlight Restoration',
+    'Headlight\nRestoration',
   ],
 };
 List<ServicesPlan> servicePlan = [
   ServicesPlan(
     title: 'Standard Wash',
     services: plans['Standard']!,
-    price: '15',
+    price: '500',
   ),
   ServicesPlan(
     title: 'Deluxe Wash',
     services: plans['Deluxe']!,
-    price: '45',
+    price: '1000',
   ),
   ServicesPlan(
     title: 'Premium Wash',
     services: plans['Premium']!,
-    price: '95',
+    price: '1500',
   ),
 ];
