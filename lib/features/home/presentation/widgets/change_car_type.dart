@@ -17,7 +17,7 @@ class ChangeCarType extends StatelessWidget {
               child: ListTile(
                 minTileHeight: 75,
                 leading: Image.asset(
-                  'assets/images/Screenshot from 2024-09-09 21-35-31.png',
+                  getCarTypeImage(AuthenticationBloc.user.appointement!.carType!),
                   width: 50,
                 ),
                 title: Text(AuthenticationBloc.user.appointement!.carType!),
@@ -35,5 +35,22 @@ class ChangeCarType extends StatelessWidget {
                 ),
               ),
             ));
+  }
+}
+
+String carType =AuthenticationBloc.user.appointement!.carType!;
+String getCarTypeImage(String carType) {
+  if (carType == 'Micro') {
+    return 'assets/images/Screenshot from 2024-09-09 21-36-25.png';
+  } else if (carType == 'Cope') {
+    return 'assets/images/Screenshot from 2024-09-09 21-35-31.png';
+  } else if (carType == 'Hatchback') {
+    return 'assets/images/Screenshot from 2024-09-09 21-35-50.png';
+  } else if (carType == 'Sedan') {
+    return 'assets/images/Screenshot from 2024-09-09 21-35-16.png';
+  } else if (carType == 'Minivan') {
+    return 'assets/images/Screenshot from 2024-09-09 21-35-31.png';
+  } else {
+    return 'assets/images/Screenshot from 2024-09-09 21-36-01.png';
   }
 }
