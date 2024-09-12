@@ -2,6 +2,7 @@ import 'package:carwashapp/core/constants/colors_manager.dart';
 import 'package:carwashapp/features/auth/controller/auth_bloc/auth_bloc.dart';
 import 'package:carwashapp/features/home/presentation/pages/about_us_page.dart';
 import 'package:flutter/material.dart';
+import '../../../../core/utils/media_query_utils.dart';
 import '../../../../core/utils/values.dart';
 import '../../../../generated/l10n.dart';
 import '../../data/models/services_model.dart';
@@ -22,7 +23,9 @@ class HomePage extends StatelessWidget {
           child: Column(
             crossAxisAlignment: CrossAxisAlignment.start,
             children: [
-              const SizedBox(height: 15),
+              SizedBox(
+                height: MediaQueryUtils.getWidthPercentage(context, 0.030),
+              ),
               Row(
                 children: [
                   Column(
@@ -52,14 +55,18 @@ class HomePage extends StatelessWidget {
                     fontWeight: FontWeight.bold,
                     color: primaryColor),
               ),
-              const SizedBox(height: 20),
+              SizedBox(
+                height: MediaQueryUtils.getWidthPercentage(context, 0.030),
+              ),
               const Text(
                 'We offer a wide range of services at your convenience ...',
                 style: TextStyle(fontSize: 16, color: Colors.black54),
               ),
-              const SizedBox(height: 15),
               SizedBox(
-                height: 70,
+                height: MediaQueryUtils.getWidthPercentage(context, 0.030),
+              ),
+              SizedBox(
+                height: MediaQueryUtils.getWidthPercentage(context, 0.19),
                 child: ListView.builder(
                   scrollDirection: Axis.horizontal,
                   padding: EdgeInsets.zero,
@@ -68,19 +75,21 @@ class HomePage extends StatelessWidget {
                       ServicesItem(servicesItem: servicesList[index]),
                 ),
               ),
-              const SizedBox(height: 24),
+              SizedBox(
+                height: MediaQueryUtils.getWidthPercentage(context, 0.030),
+              ),
               const Text(
                 'Your Appointment',
                 style: TextStyle(
                   fontSize: 18,
                 ),
               ),
-              const SizedBox(
-                height: 10,
+              SizedBox(
+                height: MediaQueryUtils.getWidthPercentage(context, 0.020),
               ),
               const AppointmentItem(),
-              const SizedBox(
-                height: 20,
+              SizedBox(
+                height: MediaQueryUtils.getWidthPercentage(context, 0.050),
               ),
               const Text(
                 'About Us',
@@ -88,11 +97,11 @@ class HomePage extends StatelessWidget {
                   fontSize: 18,
                 ),
               ),
-              const SizedBox(
-                height: 10,
+              SizedBox(
+                height: MediaQueryUtils.getWidthPercentage(context, 0.020),
               ),
               Container(
-                height: 170,
+                height: MediaQueryUtils.getWidthPercentage(context, 0.38),
                 decoration: const BoxDecoration(
                   borderRadius: BorderRadius.all(Radius.circular(16)),
                   image: DecorationImage(
