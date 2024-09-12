@@ -27,7 +27,7 @@ class ProfileScreen extends StatelessWidget {
           IconButton(
             icon: Icon(Icons.notifications_none, color: primaryColor),
             onPressed: () {},
-          ),
+          ), 
         ],
       ),
       body: BlocConsumer<AuthenticationBloc, AuthenticationStates>(
