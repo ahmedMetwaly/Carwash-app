@@ -1,6 +1,7 @@
 import 'package:carwashapp/features/progress/progress/progress_tracker.dart';
 import 'package:flutter/material.dart';
 
+import '../../../../core/utils/media_query_utils.dart';
 import '../../data/models/services_model.dart';
 import '../widgets/service_plan_item.dart';
 
@@ -38,8 +39,8 @@ class _ServicesPageState extends State<ServicesPage> {
       body: SingleChildScrollView(
         child: Column(
           children: [
-            const SizedBox(
-              height: 25,
+            SizedBox(
+              height: MediaQueryUtils.getHeightPercentage(context, 0.025),
             ),
             GestureDetector(
               onTap: () => setState(() {
@@ -49,7 +50,8 @@ class _ServicesPageState extends State<ServicesPage> {
               child: ServicePlanItem(
                 servicePlan: servicePlan[0],
                 img: 'assets/images/Standard.png',
-                isSelected: servicePlanSelected == 'Standard Wash' ? true : false,
+                isSelected:
+                    servicePlanSelected == 'Standard Wash' ? true : false,
                 price: servicePlan[0].price,
               ),
             ),
@@ -73,12 +75,13 @@ class _ServicesPageState extends State<ServicesPage> {
               child: ServicePlanItem(
                 servicePlan: servicePlan[2],
                 img: 'assets/images/Premium.png',
-                isSelected: servicePlanSelected == 'Premium Wash' ? true : false,
+                isSelected:
+                    servicePlanSelected == 'Premium Wash' ? true : false,
                 price: servicePlan[2].price,
               ),
             ),
-            const SizedBox(
-              height: 15,
+            SizedBox(
+              height: MediaQueryUtils.getHeightPercentage(context, 0.08),
             ),
             ElevatedButton(
               onPressed: () {

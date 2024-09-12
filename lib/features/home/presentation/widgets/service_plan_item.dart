@@ -1,6 +1,7 @@
 import 'package:carwashapp/core/constants/colors_manager.dart';
 import 'package:flutter/material.dart';
 
+import '../../../../core/utils/media_query_utils.dart';
 import '../../data/models/services_model.dart';
 
 class ServicePlanItem extends StatelessWidget {
@@ -27,9 +28,11 @@ class ServicePlanItem extends StatelessWidget {
           color: isSelected ? primaryColor : Colors.transparent,
         ),
       ),
-      margin: const EdgeInsets.all(10),
+      margin: const EdgeInsets.all(8),
       child: Padding(
-        padding: const EdgeInsets.all(15.0),
+        padding: EdgeInsets.all(
+          MediaQueryUtils.getHeightPercentage(context, 0.011),
+        ),
         child: Row(
           mainAxisAlignment: MainAxisAlignment.spaceBetween,
           children: [
@@ -40,7 +43,8 @@ class ServicePlanItem extends StatelessWidget {
                   children: [
                     Image.asset(
                       img,
-                      height: 50,
+                      height:
+                          MediaQueryUtils.getHeightPercentage(context, 0.060),
                     ),
                     const SizedBox(
                       width: 15,
@@ -68,8 +72,9 @@ class ServicePlanItem extends StatelessWidget {
                           servicePlan.services[0],
                           style: const TextStyle(fontSize: 13),
                         ),
-                        const SizedBox(
-                          width: 7,
+                        SizedBox(
+                          width: MediaQueryUtils.getWidthPercentage(
+                              context, 0.009),
                         ),
                         Icon(
                           Icons.check_circle,
@@ -81,8 +86,9 @@ class ServicePlanItem extends StatelessWidget {
                         ),
                       ],
                     ),
-                    const SizedBox(
-                      height: 5,
+                    SizedBox(
+                      height:
+                          MediaQueryUtils.getWidthPercentage(context, 0.005),
                     ),
                     Row(
                       children: [
@@ -94,8 +100,9 @@ class ServicePlanItem extends StatelessWidget {
                           servicePlan.services[2],
                           style: const TextStyle(fontSize: 13),
                         ),
-                        const SizedBox(
-                          width: 7,
+                        SizedBox(
+                          width: MediaQueryUtils.getWidthPercentage(
+                              context, 0.009),
                         ),
                         Icon(
                           Icons.check_circle,
