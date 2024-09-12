@@ -158,6 +158,9 @@ class CheckOutScreen extends StatelessWidget {
                         PaymentManager.makePayment(int.parse(price), "EGP")
                             .then((val) {
                           context.read<UserBloc>().add(BookAppointementEvent());
+                          ScaffoldMessenger.of(context).showSnackBar(
+                          const SnackBar(content: Text('Booked Successfully')),
+                        );
                           Navigator.pushReplacement(
                             context,
                             MaterialPageRoute(
@@ -167,6 +170,9 @@ class CheckOutScreen extends StatelessWidget {
                         });
                       } else {
                         context.read<UserBloc>().add(BookAppointementEvent());
+                        ScaffoldMessenger.of(context).showSnackBar(
+                          const SnackBar(content: Text('Booked Successfully')),
+                        );
                         Navigator.pushReplacement(
                             context,
                             MaterialPageRoute(

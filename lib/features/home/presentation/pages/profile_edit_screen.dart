@@ -4,6 +4,8 @@ import 'package:carwashapp/features/auth/controller/auth_bloc/auth_bloc.dart';
 import 'package:carwashapp/features/auth/controller/user_bloc/user_bloc.dart';
 import 'package:carwashapp/features/auth/controller/user_bloc/user_event.dart';
 import 'package:carwashapp/features/auth/controller/user_bloc/user_state.dart';
+import 'package:carwashapp/features/home/presentation/pages/pick_car_screen.dart';
+import 'package:carwashapp/features/home/presentation/widgets/change_car_type.dart';
 import 'package:carwashapp/features/home/presentation/widgets/change_profile_pic.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
@@ -142,14 +144,23 @@ class _EditProfileScreenState extends State<EditProfileScreen> {
                   const SizedBox(height: 20),
 
                   // Car type field (if editable)
-                  TextFormField(
-                    controller: _carTypeController,
-                    decoration: const InputDecoration(
-                      labelText: "Car Type",
-                      border: OutlineInputBorder(),
-                      prefixIcon: Icon(Icons.directions_car),
-                    ),
-                  ),
+                  ChangeCarType(),
+                  // TextFormField(
+                  //   controller: _carTypeController,
+                  //   onTap: () {
+                  //     Navigator.push(
+                  //       context,
+                  //       MaterialPageRoute(
+                  //         builder: (context) => const PickCarScreen(),
+                  //       ),
+                  //     );
+                  //   },
+                  //   decoration: const InputDecoration(
+                  //     labelText: "Car Type",
+                  //     border: OutlineInputBorder(),
+                  //     prefixIcon: Icon(Icons.directions_car),
+                  //   ),
+                  // ),
                   const SizedBox(height: 20),
 
                   // Save button
@@ -161,6 +172,8 @@ class _EditProfileScreenState extends State<EditProfileScreen> {
 
                         AuthenticationBloc.user.name = _nameController.text;
                         context.read<UserBloc>().add(ChangeProfileEvent());
+                        // context.read<UserBloc>().add(ChangeCarTypeEvent());
+
 
                         // Call your API or update logic here
 
