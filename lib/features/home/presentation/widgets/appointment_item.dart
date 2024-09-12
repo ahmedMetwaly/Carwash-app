@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 
+import '../../../auth/controller/auth_bloc/auth_bloc.dart';
 
 class AppointmentItem extends StatelessWidget {
   const AppointmentItem({
@@ -8,29 +9,31 @@ class AppointmentItem extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-        final Color primaryColor = Theme.of(context).colorScheme.primary;
+    final Color primaryColor = Theme.of(context).colorScheme.primary;
 
     return Card(
       shadowColor: primaryColor,
-      color: Theme.of(context).colorScheme.outline,
+      color: Colors.white,
       child: ListTile(
-        onTap: (){},
+        onTap: () {},
         contentPadding: const EdgeInsets.symmetric(horizontal: 10),
-        minTileHeight: 80,
+        minTileHeight: 90,
         leading: Image.asset(
-          'assets/images/مغسلة-سيارات-العباسية-.jpg',
+          'assets/images/Standard.png',
           fit: BoxFit.fitHeight,
         ),
-        title: const Text(
-          'Date-Time',
-          style: TextStyle(fontSize: 16, fontWeight: FontWeight.w500),
+        title: Text(
+          '${AuthenticationBloc.user.appointement!.date!} - ${AuthenticationBloc.user.appointement!.time!}',
+          style: const TextStyle(fontSize: 16, fontWeight: FontWeight.w500),
         ),
-        subtitle: const Text(
-          '🗺️ Location',
+        subtitle: Text(
+          '🗺️ ${AuthenticationBloc.user.address!.address}',
+          overflow: TextOverflow.ellipsis,
+          maxLines: 3,
         ),
         trailing: IconButton(
           onPressed: () {},
-          icon:  Icon(
+          icon: Icon(
             Icons.chevron_right_rounded,
             color: primaryColor,
           ),
