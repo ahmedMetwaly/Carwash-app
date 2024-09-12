@@ -13,7 +13,7 @@ class PickCarScreen extends StatefulWidget {
 }
 
 class _PickCarScreenState extends State<PickCarScreen> {
-  String selectedType = AuthenticationBloc.user.appointement!.carType!;
+  String selectedType = AuthenticationBloc.user.appointment!.carType!;
   @override
   Widget build(BuildContext context) {
     final Color primaryColor = Theme.of(context).colorScheme.primary;

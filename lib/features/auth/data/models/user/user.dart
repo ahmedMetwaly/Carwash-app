@@ -10,7 +10,7 @@ class UserModel {
   String? password;
   String? phoneNumber;
   AddressModel? address;
-  AppointmentModelAuth? appointement;
+  AppointmentModelAuth? appointment;
 
   UserModel(
       {this.uid,
@@ -20,7 +20,7 @@ class UserModel {
       required this.password,
       this.phoneNumber,
       this.address,
-      this.appointement,
+      this.appointment,
       });
   UserModel.fromJson(Map<String, dynamic> json) {
     uid = json['uid'];
@@ -30,7 +30,7 @@ class UserModel {
     imageUrl = json["imageUrl"];
     phoneNumber = json["phoneNumber"];
     address = AddressModel.fromJson(json['address']);
-    appointement = AppointmentModelAuth.fromJson(json["appointement"]);
+    appointment = AppointmentModelAuth.fromJson(json["appointement"]);
   }
   Map<String, dynamic> toJson() {
     final Map<String, dynamic> data = <String, dynamic>{};
@@ -41,7 +41,7 @@ class UserModel {
     data["imageUrl"] = imageUrl;
     data["phoneNumber"] = phoneNumber;
     data["address"] = address!.toJson();
-    data["appointement"] = appointement!.toJson();
+    data["appointement"] = appointment!.toJson();
     return data;
   }
 }

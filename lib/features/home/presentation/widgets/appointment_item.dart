@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 
 import '../../../auth/controller/auth_bloc/auth_bloc.dart';
+import '../pages/appointment_screen.dart';
 
 class AppointmentItem extends StatelessWidget {
   const AppointmentItem({
@@ -15,7 +16,10 @@ class AppointmentItem extends StatelessWidget {
       shadowColor: primaryColor,
       color: Colors.white,
       child: ListTile(
-        onTap: () {},
+        onTap: () {
+          Navigator.push(context,
+              MaterialPageRoute(builder: (context) => const ReceiptScreen()));
+        },
         contentPadding: const EdgeInsets.symmetric(horizontal: 10),
         minTileHeight: 90,
         leading: Image.asset(
@@ -23,7 +27,7 @@ class AppointmentItem extends StatelessWidget {
           fit: BoxFit.fitHeight,
         ),
         title: Text(
-          '${AuthenticationBloc.user.appointement!.date!} - ${AuthenticationBloc.user.appointement!.time!}',
+          '${AuthenticationBloc.user.appointment!.date!} - ${AuthenticationBloc.user.appointment!.time!}',
           style: const TextStyle(fontSize: 16, fontWeight: FontWeight.w500),
         ),
         subtitle: Text(
@@ -32,7 +36,10 @@ class AppointmentItem extends StatelessWidget {
           maxLines: 3,
         ),
         trailing: IconButton(
-          onPressed: () {},
+          onPressed: () {
+            Navigator.push(context,
+                MaterialPageRoute(builder: (context) => const ReceiptScreen()));
+          },
           icon: Icon(
             Icons.chevron_right_rounded,
             color: primaryColor,

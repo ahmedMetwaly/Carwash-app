@@ -39,7 +39,7 @@ class UserBloc extends Bloc<UserEvents, UserState> {
     try {
       emit(UpdatindDataState());
       AppointmentModelAuth appointmentModel =
-          AuthenticationBloc.user.appointement!;
+          AuthenticationBloc.user.appointment!;
       //     print(appointmentModel.carType);
       await UserRepo()
           .updataUserData(
@@ -59,7 +59,7 @@ class UserBloc extends Bloc<UserEvents, UserState> {
     try {
       emit(UpdatindDataState());
       AppointmentModelAuth appointmentModel =
-          AuthenticationBloc.user.appointement!;
+          AuthenticationBloc.user.appointment!;
       await UserRepo()
           .updataUserData(
               userId: AuthenticationBloc.user.uid!,

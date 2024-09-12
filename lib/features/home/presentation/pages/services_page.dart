@@ -85,7 +85,10 @@ class _ServicesPageState extends State<ServicesPage> {
                 Navigator.push(
                   context,
                   MaterialPageRoute(
-                    builder: (context) => ProgressTrackerScreen(),
+                    builder: (context) => ProgressTrackerScreen(
+                      title: servicePlanSelected,
+                      price: selectedPrice,
+                    ),
                   ),
                 );
               },

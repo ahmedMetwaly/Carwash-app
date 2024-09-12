@@ -47,14 +47,14 @@ class AppTextButton extends StatelessWidget {
           ),
         ),
         fixedSize: WidgetStateProperty.all(
-          Size(buttonWidth ?? double.maxFinite, buttonHeight ?? 50),
+          Size(buttonWidth ?? double.maxFinite, buttonHeight ?? 60),
         ),
       ),
       onPressed: onPressed,
       child: Text(
         buttonText,
         style: const TextStyle(
-            fontSize: 20, fontWeight: FontWeight.bold, color: Colors.white),
+            fontSize: 18, fontWeight: FontWeight.bold, color: Colors.white),
       ),
     );
   }

@@ -161,7 +161,7 @@ class SignUp extends StatelessWidget {
                                 imageUrl: AuthenticationBloc.user.imageUrl,
                                 address: AuthenticationBloc.user.address,
                                 phoneNumber: phoneNumber.text,
-                                appointement: AppointmentModelAuth(
+                                appointment: AppointmentModelAuth(
                                     address: AuthenticationBloc.user.address,
                                     carType: "",
                                     date: "",

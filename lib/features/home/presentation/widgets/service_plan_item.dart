@@ -31,6 +31,7 @@ class ServicePlanItem extends StatelessWidget {
       child: Padding(
         padding: const EdgeInsets.all(15.0),
         child: Row(
+          mainAxisAlignment: MainAxisAlignment.spaceBetween,
           children: [
             Column(
               crossAxisAlignment: CrossAxisAlignment.start,
@@ -68,7 +69,7 @@ class ServicePlanItem extends StatelessWidget {
                           style: const TextStyle(fontSize: 13),
                         ),
                         const SizedBox(
-                          width: 10,
+                          width: 7,
                         ),
                         Icon(
                           Icons.check_circle,
@@ -94,7 +95,7 @@ class ServicePlanItem extends StatelessWidget {
                           style: const TextStyle(fontSize: 13),
                         ),
                         const SizedBox(
-                          width: 10,
+                          width: 7,
                         ),
                         Icon(
                           Icons.check_circle,
@@ -110,19 +111,24 @@ class ServicePlanItem extends StatelessWidget {
                 )
               ],
             ),
-            const Spacer(),
-            Text(
-              "$price EGP",
-              style: const TextStyle(
-                fontWeight: FontWeight.bold,
-                fontSize: 15,
-                color: ColorsManager.primary,
-              ),
+            Row(
+              children: [
+                Text(
+                  "$price EGP",
+                  style: const TextStyle(
+                    fontWeight: FontWeight.bold,
+                    fontSize: 15,
+                    color: ColorsManager.primary,
+                  ),
+                ),
+                Icon(
+                  isSelected
+                      ? Icons.radio_button_checked
+                      : Icons.radio_button_off,
+                  color: primaryColor,
+                ),
+              ],
             ),
-            Icon(
-              isSelected ? Icons.radio_button_checked : Icons.radio_button_off,
-              color: primaryColor,
-            )
           ],
         ),
       ),

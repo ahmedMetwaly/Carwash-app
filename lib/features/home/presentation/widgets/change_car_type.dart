@@ -17,10 +17,10 @@ class ChangeCarType extends StatelessWidget {
               child: ListTile(
                 minTileHeight: 75,
                 leading: Image.asset(
-                  getCarTypeImage(AuthenticationBloc.user.appointement!.carType!),
+                  getCarTypeImage(AuthenticationBloc.user.appointment!.carType!),
                   width: 50,
                 ),
-                title: Text(AuthenticationBloc.user.appointement!.carType!),
+                title: Text(AuthenticationBloc.user.appointment!.carType!),
                 trailing: ElevatedButton(
                   style: ElevatedButton.styleFrom(
                     backgroundColor: Theme.of(context).colorScheme.primary,
@@ -38,7 +38,7 @@ class ChangeCarType extends StatelessWidget {
   }
 }
 
-String carType =AuthenticationBloc.user.appointement!.carType!;
+String carType =AuthenticationBloc.user.appointment!.carType!;
 String getCarTypeImage(String carType) {
   if (carType == 'Micro') {
     return 'assets/images/Screenshot from 2024-09-09 21-36-25.png';

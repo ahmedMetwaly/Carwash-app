@@ -53,7 +53,7 @@ class _ChoiceChipsState extends State<ChoiceChips> {
                     setState(() {
                       _selectedIndex = selected ? index : -1;
                       _selectedText = selected ? chipLabels[index] : '';
-                      AuthenticationBloc.user.appointement!.time = _selectedText;
+                      AuthenticationBloc.user.appointment!.time = _selectedText;
                       context
                           .read<DataCubit>()
                           .updateData('screen1', _selectedText);

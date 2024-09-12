@@ -17,7 +17,7 @@ class SaveCarType extends StatelessWidget {
     return BlocBuilder<UserBloc, UserState>(
       builder: (BuildContext context, UserState state) => ElevatedButton(
         onPressed: () {
-          AuthenticationBloc.user.appointement!.carType = carType;
+          AuthenticationBloc.user.appointment!.carType = carType;
           context.read<UserBloc>().add(ChangeCarTypeEvent());
           if (state is UpdatedUserDataState) {
             Navigator.pop(context);

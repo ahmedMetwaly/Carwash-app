@@ -30,7 +30,7 @@ class PaymentScreenState extends State<PaymentScreen> {
               onChanged: (value) {
                 setState(() {
                   _selectedPaymentMethod = value;
-                  AuthenticationBloc.user.appointement?.paymentMethod = value;
+                  AuthenticationBloc.user.appointment?.paymentMethod = value;
                   context
                       .read<DataCubit>()
                       .updateData('screen4', _selectedPaymentMethod!);
@@ -42,9 +42,12 @@ class PaymentScreenState extends State<PaymentScreen> {
               title: 'Credit',
               value: 'Credit',
               groupValue: _selectedPaymentMethod!,
+              
               onChanged: (value) {
                 setState(() {
                   _selectedPaymentMethod = value;
+                  AuthenticationBloc.user.appointment?.paymentMethod = value;
+
                   context
                       .read<DataCubit>()
                       .updateData('screen4', _selectedPaymentMethod!);
@@ -59,6 +62,8 @@ class PaymentScreenState extends State<PaymentScreen> {
               onChanged: (value) {
                 setState(() {
                   _selectedPaymentMethod = value;
+                  AuthenticationBloc.user.appointment?.paymentMethod = value;
+
                   context
                       .read<DataCubit>()
                       .updateData('screen4', _selectedPaymentMethod!);

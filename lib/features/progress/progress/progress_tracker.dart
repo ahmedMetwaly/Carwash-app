@@ -19,8 +19,10 @@ import '../payment/payment_screen.dart';
 import 'widgets/custom_app_bar_widget.dart';
 
 class ProgressTrackerScreen extends StatefulWidget {
-  const ProgressTrackerScreen({super.key});
-
+  const ProgressTrackerScreen(
+      {super.key, required this.title, required this.price});
+  final String title;
+  final String price;
   @override
   State<ProgressTrackerScreen> createState() => _MyAppState();
 }
@@ -106,6 +108,8 @@ class _MyAppState extends State<ProgressTrackerScreen> {
                               : index == 2
                                   ? "payment"
                                   : "checkout",
+                      title: widget.title,
+                      // height: MediaQueryUtils.getHeightPercentage(context, percentage),
                     ),
                     Padding(
                       padding: const EdgeInsets.only(top: 8),
@@ -130,11 +134,12 @@ class _MyAppState extends State<ProgressTrackerScreen> {
                                     PaddingManager.pMainPadding),
                                 child: Column(
                                   children: [
+                                    const SizedBox(height: 70),
                                     Image.asset(
                                       "assets/images/map_image.jpeg",
                                       height: 150,
                                     ),
-                                    const SizedBox(height: 10),
+                                    const SizedBox(height: 50),
                                     MyElevatedButton(
                                         title: "Select your location",
                                         onPress: () => Navigator.of(context)
@@ -147,16 +152,10 @@ class _MyAppState extends State<ProgressTrackerScreen> {
                             : index == 2
                                 ? const PaymentScreen()
                                 // : index == 3
-                                : const CheckOutScreen(),
-                    // : const Text("DONE"),
-                    // const Divider(
-                    //   height: 1.2,
-                    //   thickness: 2,
-                    //   color: Colors.grey,
-                    // ),
-                    // SizedBox(
-                    //   child: btnWidget(),
-                    // ),
+                                : CheckOutScreen(
+                                    title: widget.title,
+                                    price: widget.price,
+                                  ),
                   ],
                 ),
               ),

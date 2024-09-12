@@ -24,7 +24,10 @@ class LogIn extends StatelessWidget {
     final emailController = TextEditingController();
     final passwordController = TextEditingController();
     return Scaffold(
-      appBar: AppBar(),
+      appBar: AppBar(
+        leading: const SizedBox(),
+
+      ),
       body: SafeArea(
           child: Padding(
         padding: const EdgeInsets.all(PaddingManager.pMainPadding),

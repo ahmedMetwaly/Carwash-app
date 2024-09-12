@@ -29,6 +29,7 @@ class ProfileScreen extends StatelessWidget {
             icon: Icon(Icons.notifications_none, color: primaryColor),
             onPressed: () {},
           ),
+          
         ],
         leading: const SizedBox(),
       ),

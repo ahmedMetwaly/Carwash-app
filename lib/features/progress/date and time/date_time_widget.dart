@@ -82,7 +82,7 @@ class _DateAndTimeScreenState extends State<DateAndTimeScreen> {
                       selectedDay.weekday != DateTime.friday) {
                     setState(() {
                       _selectedDay = selectedDay;
-                      AuthenticationBloc.user.appointement!.date =
+                      AuthenticationBloc.user.appointment!.date =
                           _selectedDay.toString().split(" ")[0];
                       context.read<DataCubit>().updateData(
                           'screen2', _selectedDay.toString().split(" ")[0]);

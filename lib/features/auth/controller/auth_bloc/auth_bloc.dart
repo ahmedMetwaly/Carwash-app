@@ -34,7 +34,7 @@ class AuthenticationBloc
     imageUrl: "",
     address: AddressModel(address: "", addressUrl: ""),
     phoneNumber: "",
-    appointement: AppointmentModelAuth(
+    appointment: AppointmentModelAuth(
       time: "",
       carType: "",
       date: "",
@@ -74,7 +74,7 @@ class AuthenticationBloc
             password: user.password,
             address: user.address,
             phoneNumber: user.phoneNumber,
-            appointement: user.appointement,
+            appointment: user.appointment,
           );
 //          await FirebaseAuthService.sendEmailVerfication();
           await UserRepo().saveUserData(user).then((userData) {
