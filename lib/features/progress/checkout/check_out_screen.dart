@@ -22,7 +22,7 @@ class CheckOutScreen extends StatelessWidget {
   Widget build(BuildContext context) {
     final data = context.watch<DataCubit>().state;
     final Color primaryColor = Theme.of(context).colorScheme.primary;
-
+    AuthenticationBloc.user.appointment!.services!.title = title;
     return SizedBox(
       height: MediaQueryUtils.getHeightPercentage(context, 0.6),
       width: MediaQueryUtils.getScreenWidth(context),

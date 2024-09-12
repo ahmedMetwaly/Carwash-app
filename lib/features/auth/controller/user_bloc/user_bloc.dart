@@ -14,6 +14,7 @@ class UserBloc extends Bloc<UserEvents, UserState> {
     on<ChangeProfileImageEvent>(_changeProfileImage);
     on<ChangeCarTypeEvent>(_changeCarType);
     on<BookAppointementEvent>(_bookAppointment);
+    on<ChangeProfileEvent>(_changeProfile);
   }
 
   late XFile profileImage;
@@ -46,6 +47,26 @@ class UserBloc extends Bloc<UserEvents, UserState> {
               userId: AuthenticationBloc.user.uid!,
               field: "appointement",
               data: appointmentModel.toJson())
+          .then((_) {
+        emit(UpdatedUserDataState(user: AuthenticationBloc.user));
+      });
+    } catch (error) {
+      emit(UpdateFailedDataState(errorMessage: error.toString()));
+    }
+  }
+
+  FutureOr<void> _changeProfile(
+      ChangeProfileEvent event, Emitter<UserState> emit) async {
+    try {
+      emit(UpdatindDataState());
+      // AppointmentModelAuth appointmentModel =
+      //     AuthenticationBloc.user.appointment!;
+      // //     print(appointmentModel.carType);
+      await UserRepo()
+          .updataUserData(
+              userId: AuthenticationBloc.user.uid!,
+              field: "name",
+              data: AuthenticationBloc.user.name)
           .then((_) {
         emit(UpdatedUserDataState(user: AuthenticationBloc.user));
       });

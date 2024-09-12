@@ -43,6 +43,7 @@ class _DateAndTimeScreenState extends State<DateAndTimeScreen> {
           Container(
             decoration: BoxDecoration(border: Border.all(color: Colors.black)),
             child: TableCalendar(
+                rowHeight: MediaQueryUtils.getHeightPercentage(context, 0.049),
                 weekendDays: const [
                   DateTime.friday,
                   DateTime.saturday,

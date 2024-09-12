@@ -23,7 +23,7 @@ class AppointmentItem extends StatelessWidget {
         contentPadding: const EdgeInsets.symmetric(horizontal: 10),
         minTileHeight: 90,
         leading: Image.asset(
-          'assets/images/Standard.png',
+          getServicePlanImage(AuthenticationBloc.user.appointment!.services!.title!),
           fit: BoxFit.fitHeight,
         ),
         title: Text(

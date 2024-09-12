@@ -4,6 +4,7 @@ import 'package:carwashapp/core/utils/values.dart';
 import 'package:carwashapp/features/auth/controller/auth_bloc/auth_events.dart';
 import 'package:carwashapp/features/auth/controller/auth_bloc/auth_states.dart';
 import 'package:carwashapp/features/home/presentation/pages/about_us_page.dart';
+import 'package:carwashapp/features/home/presentation/pages/profile_edit_screen.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import '../../../auth/controller/auth_bloc/auth_bloc.dart';
@@ -77,7 +78,22 @@ class ProfileScreen extends StatelessWidget {
               ),
               Expanded(
                   child: ListView(children: [
-                const SettingsItem(
+                SettingsItem(
+                  onTap: () {
+                    Navigator.push(
+                      context,
+                      MaterialPageRoute(
+                        builder: (context) => EditProfileScreen(
+                          currentName: AuthenticationBloc.user.name!,
+                          currentEmail: AuthenticationBloc.user.email!,
+                          currentCarType:
+                              AuthenticationBloc.user.appointment!.carType!,
+                          currentProfileImageUrl:
+                              AuthenticationBloc.user.imageUrl!,
+                        ),
+                      ),
+                    );
+                  },
                   leading: Icon(
                     Icons.edit,
                     color: Colors.white,

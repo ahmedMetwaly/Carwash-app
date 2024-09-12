@@ -6,4 +6,6 @@ class UpdateCarTypeEvent extends UserEvents {}
 
 class ChangeCarTypeEvent extends UserEvents {}
 
-class BookAppointementEvent extends UserEvents{} 
+class BookAppointementEvent extends UserEvents {}
+
+class ChangeProfileEvent extends UserEvents {}

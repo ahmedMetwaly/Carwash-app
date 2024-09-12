@@ -1,4 +1,5 @@
 import 'package:carwashapp/core/constants/colors_manager.dart';
+import 'package:carwashapp/features/home/presentation/pages/appointment_edit_screen.dart';
 import 'package:carwashapp/features/home/presentation/widgets/appointment_details_card.dart';
 import 'package:flutter/material.dart';
 
@@ -16,10 +17,15 @@ class ReceiptScreen extends StatelessWidget {
         "${AuthenticationBloc.user.appointment!.time!}, ${AuthenticationBloc.user.appointment!.date!}";
     String location = AuthenticationBloc.user.address!.address!;
     String paymentMethod = AuthenticationBloc.user.appointment!.paymentMethod!;
+    String? title = AuthenticationBloc.user.appointment!.services!.title;
 
     return Scaffold(
       appBar: AppBar(
-        title: const Text('Standard Wash'),
+        title: Text(
+          title!,
+          style: const TextStyle(color: ColorsManager.primary),
+        ),
+        centerTitle: true,
       ),
       body: Padding(
         padding: const EdgeInsets.all(16.0),
@@ -46,7 +52,8 @@ class ReceiptScreen extends StatelessWidget {
             // Display the QR code image
             Center(
               child: Image.asset(
-                'assets/images/Standard.png', // Path to your asset image
+                getServicePlanImage(AuthenticationBloc.user.appointment!
+                    .services!.title!), // Path to your asset image
                 height: MediaQueryUtils.getHeightPercentage(context, 0.30),
                 width: MediaQueryUtils.getWidthPercentage(context, 0.5),
               ),
@@ -67,6 +74,19 @@ class ReceiptScreen extends StatelessWidget {
                 ),
                 onPressed: () {
                   // Handle edit appointment
+                  Navigator.push(
+                    context,
+                    MaterialPageRoute(
+                      builder: (context) => EditAppointmentScreen(
+                        initialDate: AuthenticationBloc.user.appointment!.date!,
+                        initialTime: AuthenticationBloc.user.appointment!.time!,
+                        initialLocation:
+                            AuthenticationBloc.user.address!.address!,
+                        initialPaymentMethod:
+                            AuthenticationBloc.user.appointment!.paymentMethod!,
+                      ),
+                    ),
+                  );
                 },
                 child: const Text(
                   'Edit Appointment',
@@ -99,5 +119,16 @@ class ReceiptScreen extends StatelessWidget {
         ),
       ),
     );
+  }
+}
+
+String servicePlan = AuthenticationBloc.user.appointment!.services!.title!;
+String getServicePlanImage(String servicePlan) {
+  if (servicePlan == 'Standard Wash') {
+    return 'assets/images/Standard.png';
+  } else if (servicePlan == 'Deluxe Wash') {
+    return 'assets/images/Deluxe.png';
+  } else {
+    return 'assets/images/Premium.png';
   }
 }

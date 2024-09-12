@@ -16,12 +16,12 @@ class ChoiceChips extends StatefulWidget {
 class _ChoiceChipsState extends State<ChoiceChips> {
   final List<String> chipLabels = [
     '11:30 am ',
-    '12:00 am ',
-    '1:00 am ',
-    '2:00 am ',
-    '3:30 am ',
-    '4:30 am ',
-    '5:30 am ',
+    '12:00 pm ',
+    '1:00 pm ',
+    '2:00 pm ',
+    '3:30 pm ',
+    '4:30 pm ',
+    '5:30 pm ',
   ];
   int _selectedIndex = -1;
   String _selectedText = '';
