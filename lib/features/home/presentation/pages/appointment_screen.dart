@@ -1,5 +1,8 @@
+import 'package:carwashapp/core/constants/colors_manager.dart';
+import 'package:carwashapp/features/home/presentation/widgets/appointment_details_card.dart';
 import 'package:flutter/material.dart';
 
+import '../../../../core/utils/media_query_utils.dart';
 import '../../../auth/controller/auth_bloc/auth_bloc.dart';
 
 class ReceiptScreen extends StatelessWidget {
@@ -8,8 +11,9 @@ class ReceiptScreen extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     // Static data for the appointment
-    String appointmentId = "123456"; // Static appointment ID
-    String date = "${AuthenticationBloc.user.appointment!.time!}, ${AuthenticationBloc.user.appointment!.date!}";
+    // String appointmentId = "123456"; // Static appointment ID
+    String date =
+        "${AuthenticationBloc.user.appointment!.time!}, ${AuthenticationBloc.user.appointment!.date!}";
     String location = AuthenticationBloc.user.address!.address!;
     String paymentMethod = AuthenticationBloc.user.appointment!.paymentMethod!;
 
@@ -33,51 +37,54 @@ class ReceiptScreen extends StatelessWidget {
             const SizedBox(height: 16),
 
             // Appointment details wrapped inside a Card with border and shadow
-            AppointmentDetailsCard(date: date, location: location, paymentMethod: paymentMethod),
-            const SizedBox(height: 50),
+            AppointmentDetailsCard(
+                date: date, location: location, paymentMethod: paymentMethod),
+            SizedBox(
+              height: MediaQueryUtils.getHeightPercentage(context, 0.04),
+            ),
 
             // Display the QR code image
             Center(
               child: Image.asset(
                 'assets/images/Standard.png', // Path to your asset image
-                width: 200,
-                height: 200,
+                height: MediaQueryUtils.getHeightPercentage(context, 0.30),
+                width: MediaQueryUtils.getWidthPercentage(context, 0.5),
               ),
             ),
-            // const SizedBox(height: 16),
 
-            // Centered Text after QR code
-            // const Center(
-            //   child: Column(
-            //     children: [
-            //       Text(
-            //         'Scan this code to start your car',
-            //         style: TextStyle(fontSize: 16),
-            //       ),
-            //       Text(
-            //         'with appointment.',
-            //         style: TextStyle(fontSize: 16),
-            //       ),
-            //     ],
-            //   ),
-            // ),
-            const SizedBox(height: 130),
+            SizedBox(
+              height: MediaQueryUtils.getHeightPercentage(context, 0.04),
+            ),
 
             // Full-width Edit Appointment Button
             SizedBox(
-              width: double.infinity, // Full width of the screen
+              width: MediaQueryUtils.getScreenWidth(
+                  context), // Full width of the screen
+              height: MediaQueryUtils.getHeightPercentage(context, 0.06),
               child: ElevatedButton(
+                style: ElevatedButton.styleFrom(
+                  backgroundColor: ColorsManager.primary,
+                ),
                 onPressed: () {
                   // Handle edit appointment
                 },
-                child: const Text('Edit Appointment'),
+                child: const Text(
+                  'Edit Appointment',
+                  style: TextStyle(
+                    color: ColorsManager.white,
+                  ),
+                ),
               ),
             ),
-            const SizedBox(height: 8),
+            SizedBox(
+              height: MediaQueryUtils.getWidthPercentage(context, 0.02),
+            ),
 
             // Full-width Cancel Appointment Button (Outlined)
             SizedBox(
-              width: double.infinity, // Full width of the screen
+              width: MediaQueryUtils.getScreenWidth(
+                  context), // Full width of the screen
+              height: MediaQueryUtils.getHeightPercentage(context, 0.06),
               child: OutlinedButton(
                 onPressed: () {
                   // Handle cancel appointment
@@ -87,73 +94,6 @@ class ReceiptScreen extends StatelessWidget {
                 ),
                 child: const Text('Cancel Appointment'),
               ),
-            ),
-          ],
-        ),
-      ),
-    );
-  }
-}
-
-class AppointmentDetailsCard extends StatelessWidget {
-  const AppointmentDetailsCard({
-    super.key,
-    required this.date,
-    required this.location,
-    required this.paymentMethod,
-  });
-
-  final String date;
-  final String location;
-  final String paymentMethod;
-
-  @override
-  Widget build(BuildContext context) {
-    return Card(
-      elevation: 4,
-      shape: RoundedRectangleBorder(
-        borderRadius: BorderRadius.circular(8),
-      ),
-      child: Padding(
-        padding: const EdgeInsets.all(16.0),
-        child: Column(
-          crossAxisAlignment: CrossAxisAlignment.start,
-          children: [
-            // Display Date and Time
-            Row(
-              children: [
-                const Icon(Icons.calendar_today, color: Colors.blue),
-                const SizedBox(width: 8),
-                Text(date, style: const TextStyle(fontSize: 16)),
-              ],
-            ),
-            const SizedBox(height: 16),
-    
-            // Display Location
-            Row(
-              children: [
-                const Icon(Icons.location_on, color: Colors.blue),
-                const SizedBox(width: 8),
-                Expanded(
-                  child: Text(
-                    location,
-                    style: const TextStyle(fontSize: 16),
-                    overflow: TextOverflow.ellipsis,
-                    maxLines: 3,
-                  ),
-                ),
-              ],
-            ),
-            const SizedBox(height: 16),
-    
-            // Display Payment Method
-            Row(
-              children: [
-                const Icon(Icons.payment, color: Colors.blue),
-                const SizedBox(width: 8),
-                Text(paymentMethod,
-                    style: const TextStyle(fontSize: 16)),
-              ],
             ),
           ],
         ),

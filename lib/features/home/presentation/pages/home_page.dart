@@ -4,7 +4,6 @@ import 'package:carwashapp/features/home/presentation/pages/about_us_page.dart';
 import 'package:flutter/material.dart';
 import '../../../../core/utils/media_query_utils.dart';
 import '../../../../core/utils/values.dart';
-import '../../../../generated/l10n.dart';
 import '../../data/models/services_model.dart';
 import '../widgets/appointment_item.dart';
 import '../widgets/services_item.dart';

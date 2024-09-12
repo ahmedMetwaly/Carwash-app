@@ -1,3 +1,4 @@
+import 'package:carwashapp/features/home/presentation/widgets/appointment_details_card.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:gap/gap.dart';
@@ -9,10 +10,8 @@ import '../../auth/controller/auth_bloc/auth_bloc.dart';
 import '../../auth/controller/user_bloc/user_bloc.dart';
 import '../../auth/controller/user_bloc/user_event.dart';
 import '../../auth/controller/user_bloc/user_state.dart';
-import '../../home/presentation/pages/appointment_screen.dart';
 import '../../home/presentation/pages/main_page.dart';
 import '../payment/stripe_payment/payment_manger.dart';
-import 'widgets/custom_row.dart';
 
 class CheckOutScreen extends StatelessWidget {
   const CheckOutScreen({super.key, required this.title, required this.price});
