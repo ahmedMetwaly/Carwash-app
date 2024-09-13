@@ -1,7 +1,11 @@
 import 'package:carwashapp/core/constants/colors_manager.dart';
 import 'package:carwashapp/features/auth/controller/auth_bloc/auth_bloc.dart';
+import 'package:carwashapp/features/auth/controller/user_bloc/user_bloc.dart';
+import 'package:carwashapp/features/auth/controller/user_bloc/user_state.dart';
 import 'package:carwashapp/features/home/presentation/pages/about_us_page.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:skeletonizer/skeletonizer.dart';
 import '../../../../core/utils/media_query_utils.dart';
 import '../../../../core/utils/values.dart';
 import '../../data/models/services_model.dart';
@@ -86,7 +90,17 @@ class HomePage extends StatelessWidget {
               SizedBox(
                 height: MediaQueryUtils.getWidthPercentage(context, 0.020),
               ),
-              const AppointmentItem(),
+              BlocBuilder<UserBloc, UserState>(
+                builder: (context, state) {
+                  if (state is UpdatindDataState) {
+                    return const Skeletonizer(
+                      child: AppointmentItem(),
+                    );
+                  } else {
+                    return const AppointmentItem();
+                  }
+                },
+              ),
               SizedBox(
                 height: MediaQueryUtils.getWidthPercentage(context, 0.050),
               ),

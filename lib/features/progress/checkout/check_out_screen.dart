@@ -30,7 +30,6 @@ class CheckOutScreen extends StatelessWidget {
     AuthenticationBloc.user.appointment!.services!.title = title;
     AuthenticationBloc.user.appointment!.services!.price = price;
 
-
     return SizedBox(
       height: MediaQueryUtils.getHeightPercentage(context, 0.6),
       width: MediaQueryUtils.getScreenWidth(context),

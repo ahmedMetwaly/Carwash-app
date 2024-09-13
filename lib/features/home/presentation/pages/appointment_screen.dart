@@ -1,10 +1,15 @@
 import 'package:carwashapp/core/constants/colors_manager.dart';
+import 'package:carwashapp/features/auth/controller/user_bloc/user_bloc.dart';
+import 'package:carwashapp/features/auth/controller/user_bloc/user_event.dart';
+import 'package:carwashapp/features/auth/controller/user_bloc/user_state.dart';
 import 'package:carwashapp/features/home/presentation/pages/appointment_edit_screen.dart';
 import 'package:carwashapp/features/home/presentation/widgets/appointment_details_card.dart';
 import 'package:carwashapp/features/progress/checkout/check_out_screen.dart';
 import 'package:carwashapp/features/progress/progress/progress_tracker.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:progress_tracker/progress_tracker.dart';
+import 'package:skeletonizer/skeletonizer.dart';
 
 import '../../../../core/utils/media_query_utils.dart';
 import '../../../auth/controller/auth_bloc/auth_bloc.dart';
@@ -16,10 +21,7 @@ class ReceiptScreen extends StatelessWidget {
   Widget build(BuildContext context) {
     // Static data for the appointment
     // String appointmentId = "123456"; // Static appointment ID
-    String date =
-        "${AuthenticationBloc.user.appointment!.time!}, ${AuthenticationBloc.user.appointment!.date!}";
-    String location = AuthenticationBloc.user.address!.address!;
-    String paymentMethod = AuthenticationBloc.user.appointment!.paymentMethod!;
+   
     String? title = AuthenticationBloc.user.appointment!.services!.title;
 
     return Scaffold(
@@ -46,8 +48,22 @@ class ReceiptScreen extends StatelessWidget {
             const SizedBox(height: 16),
 
             // Appointment details wrapped inside a Card with border and shadow
-            AppointmentDetailsCard(
-                date: date, location: location, paymentMethod: paymentMethod),
+            BlocBuilder<UserBloc, UserState>(
+              builder: (context, state) {
+                if (state is UpdatindDataState) {
+                  return Skeletonizer(
+                    child:AppointmentDetailsCard(
+                    date: "${AuthenticationBloc.user.appointment!.time!}, ${AuthenticationBloc.user.appointment!.date!}",
+                    location: AuthenticationBloc.user.address!.address!,
+                    paymentMethod: AuthenticationBloc.user.appointment!.paymentMethod!) ,
+                  );
+                } else {return AppointmentDetailsCard(
+                    date: "${AuthenticationBloc.user.appointment!.time!}, ${AuthenticationBloc.user.appointment!.date!}",
+                    location: AuthenticationBloc.user.address!.address!,
+                    paymentMethod: AuthenticationBloc.user.appointment!.paymentMethod!);}
+                
+              },
+            ),
             SizedBox(
               height: MediaQueryUtils.getHeightPercentage(context, 0.04),
             ),
@@ -77,12 +93,15 @@ class ReceiptScreen extends StatelessWidget {
                 ),
                 onPressed: () {
                   // Handle edit appointment
-                  Navigator.push(context,
-              MaterialPageRoute(builder: (context) => ProgressTrackerScreen(
-                title: title,
-                price:  AuthenticationBloc.user.appointment!.services!.price!,
-                isUpdate: true,
-              )));
+                  Navigator.push(
+                      context,
+                      MaterialPageRoute(
+                          builder: (context) => ProgressTrackerScreen(
+                                title: title,
+                                price: AuthenticationBloc
+                                    .user.appointment!.services!.price!,
+                                isUpdate: true,
+                              )));
                   // Navigator.push(
                   //   context,
                   //   MaterialPageRoute(
@@ -110,19 +129,27 @@ class ReceiptScreen extends StatelessWidget {
             ),
 
             // Full-width Cancel Appointment Button (Outlined)
-            SizedBox(
-              width: MediaQueryUtils.getScreenWidth(
-                  context), // Full width of the screen
-              height: MediaQueryUtils.getHeightPercentage(context, 0.06),
-              child: OutlinedButton(
-                onPressed: () {
-                  // Handle cancel appointment
-                },
-                style: OutlinedButton.styleFrom(
-                  foregroundColor: Colors.red,
-                ),
-                child: const Text('Cancel Appointment'),
-              ),
+            BlocBuilder<UserBloc, UserState>(
+              builder: (context, state) {
+                return SizedBox(
+                  width: MediaQueryUtils.getScreenWidth(
+                      context), // Full width of the screen
+                  height: MediaQueryUtils.getHeightPercentage(context, 0.06),
+                  child: OutlinedButton(
+                    onPressed: () {
+                      // Handle cancel appointment
+                      AuthenticationBloc.user.appointment!.date = '';
+                      AuthenticationBloc.user.appointment!.time = '';
+                      AuthenticationBloc.user.appointment!.paymentMethod = '';
+                      context.read<UserBloc>().add(BookAppointementEvent());
+                    },
+                    style: OutlinedButton.styleFrom(
+                      foregroundColor: Colors.red,
+                    ),
+                    child: const Text('Cancel Appointment'),
+                  ),
+                );
+              },
             ),
           ],
         ),
