@@ -35,7 +35,7 @@ class AuthenticationBloc
     phoneNumber: "",
     appointment: AppointmentModelAuth(
       time: "",
-      carType: "",
+      carType: "Micro",
       date: "",
       paymentMethod: "",
       services: ServicesPlan(title: "", price: "", ),

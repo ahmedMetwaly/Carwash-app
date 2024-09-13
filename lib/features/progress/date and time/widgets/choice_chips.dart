@@ -23,8 +23,8 @@ class _ChoiceChipsState extends State<ChoiceChips> {
     '4:30 pm ',
     '5:30 pm ',
   ];
-  int _selectedIndex = -1;
-  String _selectedText = '';
+  int _selectedIndex = 0;
+  String _selectedText = "11:30 am ";
 
   @override
   Widget build(BuildContext context) {

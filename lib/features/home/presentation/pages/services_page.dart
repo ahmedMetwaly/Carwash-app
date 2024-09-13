@@ -14,7 +14,7 @@ class ServicesPage extends StatefulWidget {
 
 class _ServicesPageState extends State<ServicesPage> {
   String servicePlanSelected = 'Standard Wash';
-  String selectedPrice = '50';
+  String selectedPrice = '500';
 
   @override
   Widget build(BuildContext context) {
@@ -37,6 +37,8 @@ class _ServicesPageState extends State<ServicesPage> {
         leading: const SizedBox(),
       ),
       body: SingleChildScrollView(
+        scrollDirection: Axis.horizontal,
+        physics: const NeverScrollableScrollPhysics(),
         child: Column(
           children: [
             SizedBox(

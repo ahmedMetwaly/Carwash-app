@@ -19,9 +19,7 @@ class ReceiptScreen extends StatelessWidget {
   Widget build(BuildContext context) {
     // Static data for the appointment
     // String appointmentId = "123456"; // Static appointment ID
-
     String? title = AuthenticationBloc.user.appointment!.services!.title;
-
     return Scaffold(
       appBar: AppBar(
         title: Text(

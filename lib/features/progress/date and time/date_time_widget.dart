@@ -1,7 +1,6 @@
 import 'package:carwashapp/features/auth/controller/auth_bloc/auth_bloc.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
-import 'package:gap/gap.dart';
 import 'package:table_calendar/table_calendar.dart';
 
 import '../../../core/Functions/update_cubit_functions.dart';
@@ -16,13 +15,14 @@ class DateAndTimeScreen extends StatefulWidget {
 }
 
 class _DateAndTimeScreenState extends State<DateAndTimeScreen> {
-  bool isSelected = false;
   DateTime today = DateTime.now();
   DateTime _selectedDay = DateTime.now();
 
   @override
   Widget build(BuildContext context) {
     final Color primaryColor = Theme.of(context).colorScheme.primary;
+    AuthenticationBloc.user.appointment!.date =
+        _selectedDay.toString().split(" ")[0];
 
     return SizedBox(
       height: MediaQueryUtils.getHeightPercentage(context, 0.6),

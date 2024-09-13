@@ -1,9 +1,7 @@
 import "package:carwashapp/features/auth/controller/shared_pref_bloc/sharedpref_state.dart";
 import "package:firebase_auth/firebase_auth.dart";
 import "package:flutter/material.dart";
-
 import "package:flutter_bloc/flutter_bloc.dart";
-
 import "../../../../../core/constants/image_manager.dart";
 import "../../../../../core/constants/routes.dart";
 import "../../../../../core/utils/values.dart";
@@ -56,7 +54,6 @@ class SplashScreen extends StatelessWidget {
             ));
       },
       listener: (BuildContext context, AuthenticationStates state) async {
-       
           if (state is AuthenticationSuccessState &&
               FirebaseAuth.instance.currentUser?.emailVerified == true) {
             //print("the email verified");

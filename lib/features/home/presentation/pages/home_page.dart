@@ -10,7 +10,6 @@ import '../widgets/services_item.dart';
 
 class HomePage extends StatelessWidget {
   const HomePage({super.key});
-
   @override
   Widget build(BuildContext context) {
     final Color primaryColor = Theme.of(context).colorScheme.primary;
@@ -65,7 +64,7 @@ class HomePage extends StatelessWidget {
                 height: MediaQueryUtils.getWidthPercentage(context, 0.030),
               ),
               SizedBox(
-                height: MediaQueryUtils.getWidthPercentage(context, 0.19),
+                height: MediaQueryUtils.getWidthPercentage(context, 0.20),
                 child: ListView.builder(
                   scrollDirection: Axis.horizontal,
                   padding: EdgeInsets.zero,

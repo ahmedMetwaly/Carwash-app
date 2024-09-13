@@ -1,7 +1,5 @@
 import 'package:flutter/material.dart';
 
-import '../../../auth/controller/auth_bloc/auth_bloc.dart';
-import '../../../auth/controller/auth_bloc/auth_events.dart';
 
 class SettingsModel {
   final Icon icon;

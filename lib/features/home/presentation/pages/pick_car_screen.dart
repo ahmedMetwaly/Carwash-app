@@ -2,19 +2,18 @@ import 'package:carwashapp/core/utils/media_query_utils.dart';
 import 'package:carwashapp/core/utils/values.dart';
 import 'package:carwashapp/features/auth/controller/auth_bloc/auth_bloc.dart';
 import 'package:flutter/material.dart';
-
 import '../../data/models/car_type.dart';
 import '../widgets/save_car_type.dart';
 
 class PickCarScreen extends StatefulWidget {
   const PickCarScreen({super.key});
-
   @override
   State<PickCarScreen> createState() => _PickCarScreenState();
 }
 
 class _PickCarScreenState extends State<PickCarScreen> {
   String selectedType = AuthenticationBloc.user.appointment!.carType!;
+  
   @override
   Widget build(BuildContext context) {
     final Color primaryColor = Theme.of(context).colorScheme.primary;
@@ -49,6 +48,7 @@ class _PickCarScreenState extends State<PickCarScreen> {
                     activeColor: primaryColor,
                     value: carType[index].type,
                     groupValue: selectedType,
+                    
                     title: Row(
                       children: [
                         Text(carType[index].type),

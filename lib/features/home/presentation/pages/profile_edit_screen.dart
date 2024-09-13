@@ -62,76 +62,77 @@ class _EditProfileScreenState extends State<EditProfileScreen> {
           builder: (context, state) {
             return Form(
               key: _formKey,
-              child: Column(
+              child: SingleChildScrollView(
+                child: Column(
+                  children: [
+                    // Profile picture section
+                    const Center(
+                      child: ChangeProfileImageWidget(),
+                    ),
+                    const SizedBox(height: 20),
+                    // Name field
+                    TextFormField(
+                      controller: _nameController,
+                      decoration: const InputDecoration(
+                        labelText: "Name",
+                        border: OutlineInputBorder(),
+                        prefixIcon: Icon(Icons.person),
+                      ),
+                      validator: (value) {
+                        if (value == null || value.isEmpty) {
+                          return 'Please enter your name';
+                        }
+                        return null;
+                      },
+                    ),
+                    const SizedBox(height: 20),
                 
-                children: [
-                  // Profile picture section
-                  const Center(
-                    child: ChangeProfileImageWidget(),
-                  ),
-                  const SizedBox(height: 20),
-                  // Name field
-                  TextFormField(
-                    controller: _nameController,
-                    decoration: const InputDecoration(
-                      labelText: "Name",
-                      border: OutlineInputBorder(),
-                      prefixIcon: Icon(Icons.person),
+                    // Email field
+                    TextFormField(
+                      controller: _emailController,
+                      readOnly: true,
+                      decoration: const InputDecoration(
+                        labelText: "Email",
+                        border: OutlineInputBorder(),
+                        prefixIcon: Icon(Icons.email),
+                      ),
+                      validator: (value) {
+                        if (value == null || value.isEmpty) {
+                          return 'Please enter your email';
+                        }
+                        if (!RegExp(r'^[^@]+@[^@]+\.[^@]+').hasMatch(value)) {
+                          return 'Please enter a valid email';
+                        }
+                        return null;
+                      },
                     ),
-                    validator: (value) {
-                      if (value == null || value.isEmpty) {
-                        return 'Please enter your name';
-                      }
-                      return null;
-                    },
-                  ),
-                  const SizedBox(height: 20),
-
-                  // Email field
-                  TextFormField(
-                    controller: _emailController,
-                    readOnly: true,
-                    decoration: const InputDecoration(
-                      labelText: "Email",
-                      border: OutlineInputBorder(),
-                      prefixIcon: Icon(Icons.email),
+                    const SizedBox(height: 20),
+                    const Address(),
+                    const SizedBox(height: 20),
+                    const ChangeCarType(),
+                    const SizedBox(height: 20),
+                
+                    // Save button
+                    ElevatedButton(
+                      style: ButtonStyle(
+                          backgroundColor: WidgetStatePropertyAll(
+                              Theme.of(context).colorScheme.primary)),
+                      onPressed: () {
+                        if (_formKey.currentState!.validate()) {
+                          _formKey.currentState!.save();
+                          AuthenticationBloc.user.name = _nameController.text;
+                          context.read<UserBloc>().add(ChangeProfileEvent());
+                          ScaffoldMessenger.of(context).showSnackBar(
+                            const SnackBar(content: Text('Profile updated')),
+                          );
+                        }
+                      },
+                      child: Text("Save Changes",
+                          style: TextStyle(
+                              color: Theme.of(context).colorScheme.surface)),
                     ),
-                    validator: (value) {
-                      if (value == null || value.isEmpty) {
-                        return 'Please enter your email';
-                      }
-                      if (!RegExp(r'^[^@]+@[^@]+\.[^@]+').hasMatch(value)) {
-                        return 'Please enter a valid email';
-                      }
-                      return null;
-                    },
-                  ),
-                  const SizedBox(height: 20),
-                  const Address(),
-                  const SizedBox(height: 20),
-                  const ChangeCarType(),
-                  const SizedBox(height: 20),
-
-                  // Save button
-                  ElevatedButton(
-                    style: ButtonStyle(
-                        backgroundColor: WidgetStatePropertyAll(
-                            Theme.of(context).colorScheme.primary)),
-                    onPressed: () {
-                      if (_formKey.currentState!.validate()) {
-                        _formKey.currentState!.save();
-                        AuthenticationBloc.user.name = _nameController.text;
-                        context.read<UserBloc>().add(ChangeProfileEvent());
-                        ScaffoldMessenger.of(context).showSnackBar(
-                          const SnackBar(content: Text('Profile updated')),
-                        );
-                      }
-                    },
-                    child: Text("Save Changes",
-                        style: TextStyle(
-                            color: Theme.of(context).colorScheme.surface)),
-                  ),
-                ],
+                  ],
+                ),
               ),
             );
           },

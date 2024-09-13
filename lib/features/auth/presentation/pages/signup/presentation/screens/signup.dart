@@ -1,5 +1,6 @@
 import 'package:carwashapp/features/auth/data/models/appointment_model/appointment_model.dart';
 import 'package:carwashapp/features/auth/data/models/service_model/service_model.dart';
+import 'package:carwashapp/features/home/presentation/widgets/change_car_type.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
@@ -147,6 +148,7 @@ class SignUp extends StatelessWidget {
                           ],
                         ),
                       ),
+                      const ChangeCarType(),
                       const SizedBox(height: SizeManager.sSpace32),
                       MyElevatedButton(
                         key: const Key("goHome"),

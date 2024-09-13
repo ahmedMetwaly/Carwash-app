@@ -1,7 +1,7 @@
 import 'package:carwashapp/core/utils/values.dart';
 import 'package:carwashapp/core/widgets/elevated_button.dart';
+import 'package:carwashapp/features/auth/controller/auth_bloc/auth_bloc.dart';
 import 'package:carwashapp/features/auth/controller/user_bloc/user_bloc.dart';
-import 'package:carwashapp/features/auth/controller/user_bloc/user_event.dart';
 import 'package:carwashapp/features/auth/controller/user_bloc/user_state.dart';
 import 'package:carwashapp/features/home/presentation/pages/main_page.dart';
 import 'package:flutter/material.dart';
@@ -20,7 +20,10 @@ import 'widgets/custom_app_bar_widget.dart';
 
 class ProgressTrackerScreen extends StatefulWidget {
   const ProgressTrackerScreen(
-      {super.key, required this.title, required this.price,required  this.isUpdate});
+      {super.key,
+      required this.title,
+      required this.price,
+      required this.isUpdate});
   final String title;
   final String price;
   final bool isUpdate;
@@ -37,10 +40,19 @@ class _MyAppState extends State<ProgressTrackerScreen> {
   ];
 
   int index = 0;
-
+  bool locationNotSelected = false;
   void nextButton() {
     setState(() {
-      index++;
+      if (index == 1) {
+        if (AuthenticationBloc.user.appointment!.address!.address == "") {
+          locationNotSelected = false;
+        } else {
+          index++;
+          locationNotSelected = true;
+        }
+        AuthenticationBloc.user.appointment!.address!.address =
+            AuthenticationBloc.user.address!.address;
+      }
       statuList[index].active = true;
     });
   }
@@ -77,7 +89,10 @@ class _MyAppState extends State<ProgressTrackerScreen> {
               builder: (BuildContext context, UserState state) => index == 3
                   ? const SizedBox()
                   : AppTextButton(
-                      buttonText: "Next", onPressed: () => nextButton()),
+                      buttonText: "Next",
+                      onPressed: () {
+                        nextButton();
+                      }),
             ),
           ),
         ],
@@ -87,93 +102,93 @@ class _MyAppState extends State<ProgressTrackerScreen> {
 
   @override
   Widget build(BuildContext context) {
-    return SizedBox(
-      height: MediaQueryUtils.getScreenHeight(context),
-      child: BlocProvider(
-        create: (context) => DataCubit(),
-        child: SizedBox(
-          height: MediaQueryUtils.getHeightPercentage(context, 0.6),
-          child: SafeArea(
-            child: Scaffold(
-              bottomNavigationBar: btnWidget(),
-              body: SingleChildScrollView(
-                scrollDirection: Axis.vertical,
-                physics: const NeverScrollableScrollPhysics(),
-                child: Column(
-                  children: [
-                    CustomAppBar(
-                      text: index == 0
-                          ? "Date and time"
-                          : index == 1
-                              ? "Location"
-                              : index == 2
-                                  ? "payment"
-                                  : "checkout",
-                      title: widget.title,
-                      height:
-                          MediaQueryUtils.getHeightPercentage(context, 0.16),
-                    ),
-                    Padding(
-                      padding: const EdgeInsets.only(top: 8),
-                      child: ProgressTracker(
-                          currentIndex: index,
-                          statusList: statuList,
-                          activeColor: Theme.of(context).colorScheme.primary,
-                          // Optional: Customize the color for active steps (default: Colors.green).
-                          inActiveColor: Colors.grey
-                          // Optional: Customize the color for inactive steps (default: Colors.grey).
-                          ),
-                    ),
-                    SizedBox(
-                      height:
-                          MediaQueryUtils.getHeightPercentage(context, 0.010),
-                    ),
-                    index == 0
-                        ? const Padding(
-                            padding: EdgeInsets.all(8.0),
-                            child: DateAndTimeScreen(),
-                          )
+    return BlocProvider(
+      create: (context) => DataCubit(),
+      child: SizedBox(
+        height: MediaQueryUtils.getHeightPercentage(context, 0.6),
+        child: SafeArea(
+          child: Scaffold(
+            bottomNavigationBar: btnWidget(),
+            body: SingleChildScrollView(
+              scrollDirection: Axis.vertical,
+              physics: const NeverScrollableScrollPhysics(),
+              child: Column(
+                children: [
+                  CustomAppBar(
+                    text: index == 0
+                        ? "Date and time"
                         : index == 1
-                            ? Padding(
-                                padding: const EdgeInsets.all(
-                                    PaddingManager.pMainPadding),
-                                child: Column(
-                                  children: [
-                                    SizedBox(
-                                      height:
-                                          MediaQueryUtils.getHeightPercentage(
-                                              context, 0.10),
-                                    ),
-                                    Image.asset(
-                                      "assets/images/map_image.jpeg",
-                                      height:
-                                          MediaQueryUtils.getHeightPercentage(
-                                              context, 0.18),
-                                    ),
-                                    SizedBox(
-                                      height:
-                                          MediaQueryUtils.getHeightPercentage(
-                                              context, 0.10),
-                                    ),
-                                    MyElevatedButton(
-                                        title: "Select your location",
-                                        onPress: () => Navigator.of(context)
-                                            .push(MaterialPageRoute(
-                                                builder: (context) =>
-                                                    const GoogleMapPage(fromBookAppointment: true,))))
-                                  ],
-                                ),
-                              )
+                            ? "Location"
                             : index == 2
-                                ? const PaymentScreen()
-                                // : index == 3
-                                : CheckOutScreen(
-                                    title: widget.title,
-                                    price: widget.price,
-                                    isUpdate: widget.isUpdate,
+                                ? "payment"
+                                : "checkout",
+                    title: widget.title,
+                    height: MediaQueryUtils.getHeightPercentage(context, 0.16),
+                  ),
+                  Padding(
+                    padding: const EdgeInsets.only(top: 8),
+                    child: ProgressTracker(
+                        currentIndex: index,
+                        statusList: statuList,
+                        activeColor: Theme.of(context).colorScheme.primary,
+                        // Optional: Customize the color for active steps (default: Colors.green).
+                        inActiveColor: Colors.grey
+                        // Optional: Customize the color for inactive steps (default: Colors.grey).
+                        ),
+                  ),
+                  SizedBox(
+                    height: MediaQueryUtils.getHeightPercentage(context, 0.010),
+                  ),
+                  index == 0
+                      ? const Padding(
+                          padding: EdgeInsets.all(8.0),
+                          child: DateAndTimeScreen(),
+                        )
+                      : index == 1
+                          ? Padding(
+                              padding: const EdgeInsets.all(
+                                  PaddingManager.pMainPadding),
+                              child: Column(
+                                children: [
+                                  SizedBox(
+                                    height: MediaQueryUtils.getHeightPercentage(
+                                        context, 0.10),
                                   ),
-                  ],
-                ),
+                                  Image.asset(
+                                    "assets/images/map_image.jpeg",
+                                    height: MediaQueryUtils.getHeightPercentage(
+                                        context, 0.18),
+                                  ),
+                                  SizedBox(
+                                    height: MediaQueryUtils.getHeightPercentage(
+                                        context, 0.10),
+                                  ),
+                                  MyElevatedButton(
+                                      title: "Select your location",
+                                      onPress: () => Navigator.of(context).push(
+                                              MaterialPageRoute(
+                                                  builder: (context) {
+                                            return const GoogleMapPage(
+                                              fromBookAppointment: true,
+                                            );
+                                          }))),
+                                  locationNotSelected
+                                      ? const Text(
+                                          "Select your location, please!",
+                                          style: TextStyle(color: Colors.red))
+                                      : const SizedBox(),
+                                ],
+                              ),
+                            )
+                          : index == 2
+                              ? const PaymentScreen()
+                              // : index == 3
+                              : CheckOutScreen(
+                                  title: widget.title,
+                                  price: widget.price,
+                                  isUpdate: widget.isUpdate,
+                                ),
+                ],
               ),
             ),
           ),
