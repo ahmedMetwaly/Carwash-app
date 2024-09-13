@@ -3,7 +3,6 @@ import 'package:carwashapp/features/auth/data/models/appointment_model/appointme
 import 'package:carwashapp/features/auth/data/models/service_model/service_model.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
-
 import '../../../../core/constants/constants.dart';
 import '../../../../generated/l10n.dart';
 import '../../data/models/address/address_model.dart';
@@ -39,7 +38,7 @@ class AuthenticationBloc
       carType: "",
       date: "",
       paymentMethod: "",
-      services: ServicesPlan(title: "", price: "", services: []),
+      services: ServicesPlan(title: "", price: "", ),
       address: AddressModel(address: "", addressUrl: ""),
     ),
   );
@@ -146,6 +145,7 @@ class AuthenticationBloc
                 password: userFormGoogle.password,
                 address: user.address,
                 phoneNumber: user.phoneNumber,
+                appointment: user.appointment,
               );
               await UserRepo().saveUserData(user).then((userData) {
                 emit(LoadedState());
@@ -197,6 +197,7 @@ class AuthenticationBloc
                 password: userFormFacebook.password,
                 address: user.address,
                 phoneNumber: user.phoneNumber,
+                appointment: user.appointment,
               );
               await UserRepo().saveUserData(user).then((userData) {
                 emit(LoadedState());
@@ -249,7 +250,23 @@ class AuthenticationBloc
       SignOutEvent event, Emitter<AuthenticationStates> emit) async {
     emit(AuthinticationLoadingState());
     await FirebaseAuthService.logOut();
-
+    user = UserModel(
+      uid: "0",
+      name: S.current.guest,
+      email: "",
+      password: "",
+      imageUrl: "",
+      address: AddressModel(address: "", addressUrl: ""),
+      phoneNumber: "",
+      appointment: AppointmentModelAuth(
+        time: "",
+        carType: "",
+        date: "",
+        paymentMethod: "",
+        services: ServicesPlan(title: "", price: ""),
+        address: AddressModel(address: "", addressUrl: ""),
+      ),
+    );
     emit(LoadedState());
 
     emit(AuthLogedOutState());

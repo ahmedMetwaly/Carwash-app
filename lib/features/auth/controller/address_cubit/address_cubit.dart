@@ -7,13 +7,20 @@ import 'address_states.dart';
 
 class AddressCubit extends Cubit<AddressStates> {
   AddressCubit() : super(AddressInitialState());
-  void pickAddress(String address, String url) {
+  void pickAddress(String address, String url, bool fromBookAppointment) {
     emit(AddressLoadingState());
     print("Place picked");
-    AuthenticationBloc.user.address = AddressModel(
-      address: address,
-      addressUrl: url,
-    );
+    if (fromBookAppointment) {
+      AuthenticationBloc.user.appointment!.address = AddressModel(
+        address: address,
+        addressUrl: url,
+      );
+    } else {
+      AuthenticationBloc.user.address = AddressModel(
+        address: address,
+        addressUrl: url,
+      );
+    }
     emit(AddressSucssesState());
   }
 

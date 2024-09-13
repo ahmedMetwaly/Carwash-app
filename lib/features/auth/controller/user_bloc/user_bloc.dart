@@ -59,9 +59,7 @@ class UserBloc extends Bloc<UserEvents, UserState> {
       ChangeProfileEvent event, Emitter<UserState> emit) async {
     try {
       emit(UpdatindDataState());
-      // AppointmentModelAuth appointmentModel =
-      //     AuthenticationBloc.user.appointment!;
-      // //     print(appointmentModel.carType);
+
       await UserRepo()
           .updataUserData(
               userId: AuthenticationBloc.user.uid!,

@@ -5,7 +5,7 @@ import 'package:flutter/material.dart';
 import '../../../../core/utils/media_query_utils.dart';
 import '../../../../core/utils/values.dart';
 import '../../data/models/services_model.dart';
-import '../widgets/appointment_item.dart';
+import '../widgets/display_appointment.dart';
 import '../widgets/services_item.dart';
 
 class HomePage extends StatelessWidget {
@@ -86,7 +86,7 @@ class HomePage extends StatelessWidget {
               SizedBox(
                 height: MediaQueryUtils.getWidthPercentage(context, 0.020),
               ),
-              const AppointmentItem(),
+              const DisplayAppointment(),
               SizedBox(
                 height: MediaQueryUtils.getWidthPercentage(context, 0.050),
               ),

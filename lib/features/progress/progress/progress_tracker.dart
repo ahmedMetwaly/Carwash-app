@@ -20,7 +20,7 @@ import 'widgets/custom_app_bar_widget.dart';
 
 class ProgressTrackerScreen extends StatefulWidget {
   const ProgressTrackerScreen(
-      {super.key, required this.title, required this.price,  this.isUpdate=false});
+      {super.key, required this.title, required this.price,required  this.isUpdate});
   final String title;
   final String price;
   final bool isUpdate;
@@ -160,7 +160,7 @@ class _MyAppState extends State<ProgressTrackerScreen> {
                                         onPress: () => Navigator.of(context)
                                             .push(MaterialPageRoute(
                                                 builder: (context) =>
-                                                    const GoogleMapPage())))
+                                                    const GoogleMapPage(fromBookAppointment: true,))))
                                   ],
                                 ),
                               )

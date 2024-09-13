@@ -31,6 +31,7 @@ class CustomRadioButton extends StatelessWidget {
         ],
       ),
       child: RadioListTile<String>(
+        
         title: Row(
           children: [
             // Uncomment and add your image assets here
@@ -41,8 +42,36 @@ class CustomRadioButton extends StatelessWidget {
         ),
         value: value,
         groupValue: groupValue,
+
         onChanged: onChanged,
       ),
     );
+  }
+}
+
+
+class DisabledRadio extends StatelessWidget {
+  final int value;
+  final int groupValue;
+  final ValueChanged<int?> onChanged;
+  final bool disabled;
+
+  const DisabledRadio({
+    Key? key,
+    required this.value,
+    required this.groupValue,
+    required this.onChanged,
+    this.disabled = false,
+  }) : super(key: key);
+
+  @override
+  Widget build(BuildContext context) {
+    return disabled
+        ? const SizedBox.shrink() // Or a placeholder widget
+        : Radio<int>(
+            value: value,
+            groupValue: groupValue,
+            onChanged: onChanged,
+          );
   }
 }

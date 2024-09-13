@@ -1,15 +1,13 @@
-import 'dart:io';
-
 import 'package:carwashapp/features/auth/controller/auth_bloc/auth_bloc.dart';
 import 'package:carwashapp/features/auth/controller/user_bloc/user_bloc.dart';
 import 'package:carwashapp/features/auth/controller/user_bloc/user_event.dart';
 import 'package:carwashapp/features/auth/controller/user_bloc/user_state.dart';
-import 'package:carwashapp/features/home/presentation/pages/pick_car_screen.dart';
 import 'package:carwashapp/features/home/presentation/widgets/change_car_type.dart';
 import 'package:carwashapp/features/home/presentation/widgets/change_profile_pic.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
-import 'package:image_picker/image_picker.dart'; // For profile image picking
+
+import '../../../auth/presentation/pages/signup/presentation/widgets/address.dart';
 
 class EditProfileScreen extends StatefulWidget {
   final String currentName;
@@ -34,7 +32,6 @@ class _EditProfileScreenState extends State<EditProfileScreen> {
   late TextEditingController _nameController;
   late TextEditingController _emailController;
   late TextEditingController _carTypeController;
-  String? _profileImagePath;
 
   @override
   void initState() {
@@ -52,16 +49,6 @@ class _EditProfileScreenState extends State<EditProfileScreen> {
     super.dispose();
   }
 
-  Future<void> _pickImage() async {
-    final pickedFile =
-        await ImagePicker().pickImage(source: ImageSource.gallery);
-    if (pickedFile != null) {
-      setState(() {
-        _profileImagePath = pickedFile.path;
-      });
-    }
-  }
-
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -75,36 +62,14 @@ class _EditProfileScreenState extends State<EditProfileScreen> {
           builder: (context, state) {
             return Form(
               key: _formKey,
-              child: ListView(
+              child: Column(
+                
                 children: [
                   // Profile picture section
                   const Center(
                     child: ChangeProfileImageWidget(),
                   ),
-                  // Center(
-                  //   child: GestureDetector(
-                  //     onTap: _pickImage,
-                  //     child: CircleAvatar(
-                  //       radius: 50,
-                  //       backgroundImage: _profileImagePath == null
-                  //           ? NetworkImage(widget.currentProfileImageUrl)
-                  //           : FileImage(File(_profileImagePath!)) as ImageProvider,
-                  //       child: const Align(
-                  //         alignment: Alignment.bottomRight,
-                  //         child: CircleAvatar(
-                  //           backgroundColor: Colors.white,
-                  //           radius: 20,
-                  //           child: Icon(
-                  //             Icons.camera_alt,
-                  //             color: Colors.blueAccent,
-                  //           ),
-                  //         ),
-                  //       ),
-                  //     ),
-                  //   ),
-                  // ),
                   const SizedBox(height: 20),
-
                   // Name field
                   TextFormField(
                     controller: _nameController,
@@ -142,47 +107,29 @@ class _EditProfileScreenState extends State<EditProfileScreen> {
                     },
                   ),
                   const SizedBox(height: 20),
-
-                  // Car type field (if editable)
-                  ChangeCarType(),
-                  // TextFormField(
-                  //   controller: _carTypeController,
-                  //   onTap: () {
-                  //     Navigator.push(
-                  //       context,
-                  //       MaterialPageRoute(
-                  //         builder: (context) => const PickCarScreen(),
-                  //       ),
-                  //     );
-                  //   },
-                  //   decoration: const InputDecoration(
-                  //     labelText: "Car Type",
-                  //     border: OutlineInputBorder(),
-                  //     prefixIcon: Icon(Icons.directions_car),
-                  //   ),
-                  // ),
+                  const Address(),
+                  const SizedBox(height: 20),
+                  const ChangeCarType(),
                   const SizedBox(height: 20),
 
                   // Save button
                   ElevatedButton(
+                    style: ButtonStyle(
+                        backgroundColor: WidgetStatePropertyAll(
+                            Theme.of(context).colorScheme.primary)),
                     onPressed: () {
                       if (_formKey.currentState!.validate()) {
-                        // Save profile changes
                         _formKey.currentState!.save();
-
                         AuthenticationBloc.user.name = _nameController.text;
                         context.read<UserBloc>().add(ChangeProfileEvent());
-                        // context.read<UserBloc>().add(ChangeCarTypeEvent());
-
-
-                        // Call your API or update logic here
-
                         ScaffoldMessenger.of(context).showSnackBar(
                           const SnackBar(content: Text('Profile updated')),
                         );
                       }
                     },
-                    child: const Text("Save Changes"),
+                    child: Text("Save Changes",
+                        style: TextStyle(
+                            color: Theme.of(context).colorScheme.surface)),
                   ),
                 ],
               ),

@@ -8,7 +8,14 @@ class AppointmentModelAuth {
   String? paymentMethod;
   String? carType;
   ServicesPlan? services;
-
+  AppointmentModelAuth.toInitial() {
+    date = '';
+    time = '';
+    address = AddressModel.toInitial();
+    carType = "";
+    paymentMethod = '';
+    services = ServicesPlan.toInitial();
+  }
   AppointmentModelAuth(
       {this.date,
       this.time,

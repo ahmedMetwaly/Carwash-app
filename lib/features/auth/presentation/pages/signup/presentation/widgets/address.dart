@@ -36,7 +36,7 @@ class _AddressState extends State<Address> {
         maxLines: 4,
         onTap: () {
           Navigator.push(context,
-              MaterialPageRoute(builder: (context) => const GoogleMapPage()));
+              MaterialPageRoute(builder: (context) => const GoogleMapPage(fromBookAppointment: false,)));
         },
         decoration: InputDecoration(
           labelText: S.current.yourAddress,

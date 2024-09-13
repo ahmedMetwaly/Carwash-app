@@ -168,7 +168,7 @@ class SignUp extends StatelessWidget {
                                     paymentMethod: "",
                                     time: "",
                                     services: ServicesPlan(
-                                        price: "", services: [], title: "")));
+                                        price: "",  title: "")));
                             context
                                 .read<AuthenticationBloc>()
                                 .add(SignUpEvent());

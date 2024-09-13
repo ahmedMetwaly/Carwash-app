@@ -11,7 +11,8 @@ import '../../../../../controller/address_cubit/address_states.dart';
 import '../../../../../controller/auth_bloc/auth_bloc.dart';
 
 class GoogleMapPage extends StatelessWidget {
-  const GoogleMapPage({super.key});
+  const GoogleMapPage({super.key, required this.fromBookAppointment});
+  final bool fromBookAppointment;
   @override
   Widget build(BuildContext context) {
     const kInitialPosition = LatLng(-33.8567844, 151.213108);
@@ -44,7 +45,7 @@ class GoogleMapPage extends StatelessWidget {
             onPlacePicked: (PickResult result) {
               context
                   .read<AddressCubit>()
-                  .pickAddress(result.formattedAddress!, result.url!);
+                  .pickAddress(result.formattedAddress!, result.url!,fromBookAppointment);
               print(AuthenticationBloc.user.address!.address);
               Navigator.of(context).pop();
             },

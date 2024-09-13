@@ -1,6 +1,4 @@
-import 'package:carwashapp/features/progress/checkout/check_out_screen.dart';
 import 'package:flutter/material.dart';
-
 import '../../../auth/controller/auth_bloc/auth_bloc.dart';
 import '../pages/appointment_screen.dart';
 
@@ -18,7 +16,6 @@ class AppointmentItem extends StatelessWidget {
       color: Colors.white,
       child: ListTile(
         onTap: () {
-          
           Navigator.push(context,
               MaterialPageRoute(builder: (context) => const ReceiptScreen()));
         },
@@ -34,7 +31,7 @@ class AppointmentItem extends StatelessWidget {
           style: const TextStyle(fontSize: 16, fontWeight: FontWeight.w500),
         ),
         subtitle: Text(
-          '🗺️ ${AuthenticationBloc.user.address!.address}',
+          '🗺️ ${AuthenticationBloc.user.appointment!.address!.address}',
           overflow: TextOverflow.ellipsis,
           maxLines: 3,
         ),

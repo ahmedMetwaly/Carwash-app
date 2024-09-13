@@ -10,5 +10,5 @@ enum Languages {
 }
 
 const String adminId = "VTLPp5OzjmgqztECJRmt3br3eec2";
-const String googleMapsApiKeyAndroid = "IzaSyACGedVVLt24EPHBicIHijwA80TxcuJ_sVs";
+const String googleMapsApiKeyAndroid = "AIzaSyACGedVVLt24EPHBicIHijw80TxcuJ_sVs";
 const String googleMapsApiKeyIos = "AIzaSyDi3zA4dZcDT5HZdAcvo739b0WDi0tarAw";

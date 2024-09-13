@@ -1,7 +1,6 @@
 import 'package:carwashapp/features/home/presentation/widgets/appointment_details_card.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
-import 'package:gap/gap.dart';
 
 import '../../../core/Functions/update_cubit_functions.dart';
 import '../../../core/utils/media_query_utils.dart';
@@ -18,10 +17,10 @@ class CheckOutScreen extends StatelessWidget {
       {super.key,
       required this.title,
       required this.price,
-      this.isUpdate = false});
+      required this.isUpdate});
   final String title;
   final String price;
-  final bool? isUpdate;
+  final bool isUpdate;
 
   @override
   Widget build(BuildContext context) {
@@ -29,7 +28,6 @@ class CheckOutScreen extends StatelessWidget {
     final Color primaryColor = Theme.of(context).colorScheme.primary;
     AuthenticationBloc.user.appointment!.services!.title = title;
     AuthenticationBloc.user.appointment!.services!.price = price;
-
 
     return SizedBox(
       height: MediaQueryUtils.getHeightPercentage(context, 0.6),
@@ -63,7 +61,8 @@ class CheckOutScreen extends StatelessWidget {
               child: AppointmentDetailsCard(
                 date:
                     "${AuthenticationBloc.user.appointment!.time!}, ${AuthenticationBloc.user.appointment!.date!}",
-                location: AuthenticationBloc.user.address!.address!,
+                location:
+                    AuthenticationBloc.user.appointment!.address!.address!,
                 paymentMethod:
                     AuthenticationBloc.user.appointment!.paymentMethod!,
               ),
@@ -162,7 +161,8 @@ class CheckOutScreen extends StatelessWidget {
                   child: AppTextButton(
                     buttonText: 'Book Now',
                     onPressed: () {
-                      if (isUpdate!) {
+                      if (isUpdate ==true ) {
+                       // if(AuthenticationBloc.user.)
                         context.read<UserBloc>().add(BookAppointementEvent());
                         ScaffoldMessenger.of(context).showSnackBar(
                           const SnackBar(content: Text('Updated Successfully')),

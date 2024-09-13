@@ -1,4 +1,3 @@
-import 'package:carwashapp/features/auth/controller/auth_bloc/auth_bloc.dart';
 import 'package:carwashapp/features/progress/progress/progress_tracker.dart';
 import 'package:flutter/material.dart';
 
@@ -86,13 +85,13 @@ class _ServicesPageState extends State<ServicesPage> {
             ),
             ElevatedButton(
               onPressed: () {
-                
                 Navigator.push(
                   context,
                   MaterialPageRoute(
                     builder: (context) => ProgressTrackerScreen(
                       title: servicePlanSelected,
                       price: selectedPrice,
+                      isUpdate: false,
                     ),
                   ),
                 );

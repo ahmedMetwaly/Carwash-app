@@ -5,6 +5,10 @@ class AddressModel {
     this.addressUrl,
     this.address,
   });
+  AddressModel.toInitial(){
+    addressUrl ="";
+    address="";
+  }
   AddressModel.fromJson(Map<String, dynamic> json) {
     addressUrl = json['addressUrl'];
     address = json['address'];

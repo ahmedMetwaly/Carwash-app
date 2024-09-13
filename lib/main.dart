@@ -16,7 +16,8 @@ import 'features/auth/controller/user_bloc/user_bloc.dart';
 import 'firebase_options.dart';
 import 'generated/l10n.dart';
 import 'package:flutter_localizations/flutter_localizations.dart';
-
+//TODO:: if the oppintement "" change it to SizedBox
+//TODO ::// handle size of app
 void main() async {
   WidgetsFlutterBinding.ensureInitialized();
 Stripe.publishableKey = StripeKeys.publishableKey;
