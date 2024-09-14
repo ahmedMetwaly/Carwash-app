@@ -26,21 +26,21 @@ class ProfileDetails extends StatelessWidget {
                 return Skeletonizer(
                   enabled: true,
                   child: Column(
-                crossAxisAlignment: CrossAxisAlignment.start,
-                children: [
-                  Text(
-                    AuthenticationBloc.user.name!,
-                    style: const TextStyle(
-                      fontWeight: FontWeight.bold,
-                      fontSize: 20,
-                    ),
+                    crossAxisAlignment: CrossAxisAlignment.start,
+                    children: [
+                      Text(
+                        AuthenticationBloc.user.name!,
+                        style: const TextStyle(
+                          fontWeight: FontWeight.bold,
+                          fontSize: 20,
+                        ),
+                      ),
+                      Text(
+                        AuthenticationBloc.user.email!,
+                        style: const TextStyle(color: Colors.black45),
+                      ),
+                    ],
                   ),
-                  const Text(
-                    'Personal Use',
-                    style: TextStyle(color: Colors.black45),
-                  ),
-                ],
-              ),
                 );
               } else {
                 return Column(

@@ -33,19 +33,24 @@ class ProgressTrackerScreen extends StatefulWidget {
 
 class _MyAppState extends State<ProgressTrackerScreen> {
   final List<Status> statuList = [
-    Status(name: 'Date and time', icon: Icons.date_range_rounded),
-    Status(name: 'Location', icon: Icons.location_on_rounded),
-    Status(name: ' payment \nmethod', icon: Icons.payment_outlined),
-    Status(name: 'check out', icon: Icons.check_circle),
+    Status(name: 'Date \nand time', icon: Icons.date_range_rounded),
+    Status(name: 'Location \n   ', icon: Icons.location_on_rounded),
+    Status(name: 'payment \nmethod', icon: Icons.payment_outlined),
+    Status(name: 'check out\n    ', icon: Icons.check_circle),
   ];
 
   int index = 0;
   bool locationNotSelected = false;
+  bool paymentNotSelected = false;
   void nextButton() {
     setState(() {
       index++;
       if (widget.isUpdate && index == 2) {
         index++;
+      }
+      if (index == 2 &&
+          AuthenticationBloc.user.appointment!.paymentMethod == "") {
+        AuthenticationBloc.user.appointment!.paymentMethod = 'Cash';
       }
       if (index == 1) {
         if (AuthenticationBloc.user.appointment!.address!.address == "") {

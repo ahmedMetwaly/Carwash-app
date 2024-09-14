@@ -1,3 +1,4 @@
+import 'package:carwashapp/core/constants/colors_manager.dart';
 import 'package:carwashapp/core/constants/routes.dart';
 import 'package:carwashapp/core/utils/media_query_utils.dart';
 import 'package:carwashapp/core/utils/values.dart';
@@ -94,18 +95,27 @@ class ProfileScreen extends StatelessWidget {
                       ),
                     );
                   },
-                  leading: Icon(
+                  leading: const Icon(
                     Icons.edit,
                     color: Colors.white,
                   ),
                   title: 'Edit Profile',
                 ),
-                const SettingsItem(
-                  leading: Icon(
+                SettingsItem(
+                  leading: const Icon(
                     Icons.payment_rounded,
                     color: Colors.white,
                   ),
                   title: 'Payment Information',
+                  trailing: Text(
+                    AuthenticationBloc.user.appointment!.paymentMethod!.isEmpty
+                        ? 'No Selected Method'
+                        : AuthenticationBloc.user.appointment!.paymentMethod!,
+                    style: const TextStyle(
+                      fontSize: 12,
+                      color: ColorsManager.grey,
+                    ),
+                  ),
                 ),
                 const SettingsItem(
                   leading: Icon(
