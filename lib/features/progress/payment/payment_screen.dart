@@ -1,3 +1,5 @@
+import 'package:carwashapp/core/constants/colors_manager.dart';
+import 'package:carwashapp/core/utils/media_query_utils.dart';
 import 'package:carwashapp/features/auth/controller/user_bloc/user_bloc.dart';
 import 'package:carwashapp/features/auth/controller/user_bloc/user_state.dart';
 import 'package:flutter/material.dart';
@@ -19,9 +21,11 @@ class PaymentScreen extends StatefulWidget {
 }
 
 class PaymentScreenState extends State<PaymentScreen> {
-  String? _selectedPaymentMethod =
-      AuthenticationBloc.user.appointment!.paymentMethod ??
-          'Cash'; // Default active radio button
+  String _selectedPaymentMethod =
+      AuthenticationBloc.user.appointment!.paymentMethod!.isEmpty
+          ? 'Cash'
+          : AuthenticationBloc
+              .user.appointment!.paymentMethod!; // Default active radio button
 
   @override
   Widget build(BuildContext context) {
@@ -32,14 +36,14 @@ class PaymentScreenState extends State<PaymentScreen> {
             CustomRadioButton(
               title: 'Cash',
               value: "Cash",
-              groupValue: _selectedPaymentMethod!,
+              groupValue: _selectedPaymentMethod,
               onChanged: (value) {
                 setState(() {
-                  _selectedPaymentMethod = value;
+                  _selectedPaymentMethod = value!;
                   AuthenticationBloc.user.appointment?.paymentMethod = value;
                   context
                       .read<DataCubit>()
-                      .updateData('screen4', _selectedPaymentMethod!);
+                      .updateData('screen4', _selectedPaymentMethod);
                 });
               },
             ),
@@ -47,17 +51,33 @@ class PaymentScreenState extends State<PaymentScreen> {
             CustomRadioButton(
               title: 'Credit',
               value: "Credit",
-              groupValue: _selectedPaymentMethod!,
+              groupValue: _selectedPaymentMethod,
               onChanged: (value) {
                 setState(() {
-                  _selectedPaymentMethod = value;
+                  _selectedPaymentMethod = value!;
                   AuthenticationBloc.user.appointment?.paymentMethod = value;
                   context
                       .read<DataCubit>()
-                      .updateData('screen4', _selectedPaymentMethod!);
+                      .updateData('screen4', _selectedPaymentMethod);
                 });
               },
             ),
+            SizedBox(
+              height: MediaQueryUtils.getHeightPercentage(context, 0.2),
+            ),
+            Container(
+              padding: const EdgeInsets.all(10),
+              decoration: BoxDecoration(
+                  border: Border.all(color: ColorsManager.grey),
+                  borderRadius: BorderRadius.circular(20)),
+              child: Text(
+                'Your Payment Method Selected is $_selectedPaymentMethod',
+                style: const TextStyle(
+                  color: ColorsManager.grey,
+                  fontSize: 18,
+                ),
+              ),
+            )
           ],
         );
       },
