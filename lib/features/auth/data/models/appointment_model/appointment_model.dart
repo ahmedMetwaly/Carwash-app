@@ -1,3 +1,4 @@
+import 'package:carwashapp/features/auth/controller/auth_bloc/auth_bloc.dart';
 import 'package:carwashapp/features/auth/data/models/address/address_model.dart';
 import 'package:carwashapp/features/auth/data/models/service_model/service_model.dart';
 
@@ -12,7 +13,7 @@ class AppointmentModelAuth {
     date = '';
     time = '';
     address = AddressModel.toInitial();
-    // carType = '';
+    carType = AuthenticationBloc.user.appointment!.carType;
     paymentMethod = '';
     services = ServicesPlan.toInitial();
   }

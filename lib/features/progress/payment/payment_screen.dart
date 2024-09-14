@@ -21,7 +21,7 @@ class PaymentScreen extends StatefulWidget {
 class PaymentScreenState extends State<PaymentScreen> {
   String? _selectedPaymentMethod =
       AuthenticationBloc.user.appointment!.paymentMethod ??
-          ''; // Default active radio button
+          'Cash'; // Default active radio button
 
   @override
   Widget build(BuildContext context) {
