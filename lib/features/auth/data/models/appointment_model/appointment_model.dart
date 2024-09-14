@@ -12,7 +12,7 @@ class AppointmentModelAuth {
     date = '';
     time = '';
     address = AddressModel.toInitial();
-    carType = "";
+    // carType = '';
     paymentMethod = '';
     services = ServicesPlan.toInitial();
   }

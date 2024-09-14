@@ -1,3 +1,4 @@
+import 'package:carwashapp/core/widgets/dialogs.dart';
 import 'package:carwashapp/features/home/presentation/widgets/appointment_details_card.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
@@ -31,7 +32,7 @@ class CheckOutScreen extends StatelessWidget {
 
     return SingleChildScrollView(
       scrollDirection: Axis.vertical,
-      padding: const EdgeInsets.symmetric(horizontal:  20),
+      padding: const EdgeInsets.symmetric(horizontal: 20),
       child: Column(
         mainAxisAlignment: MainAxisAlignment.start,
         crossAxisAlignment: CrossAxisAlignment.start,
@@ -59,13 +60,12 @@ class CheckOutScreen extends StatelessWidget {
             child: AppointmentDetailsCard(
               date:
                   "${AuthenticationBloc.user.appointment!.time!}, ${AuthenticationBloc.user.appointment!.date!}",
-              location:
-                  AuthenticationBloc.user.appointment!.address!.address!,
+              location: AuthenticationBloc.user.appointment!.address!.address!,
               paymentMethod:
                   AuthenticationBloc.user.appointment!.paymentMethod!,
             ),
           ),
-        
+
           Row(
             mainAxisAlignment: MainAxisAlignment.spaceBetween,
             children: [
@@ -85,7 +85,7 @@ class CheckOutScreen extends StatelessWidget {
               ),
             ],
           ),
-        
+
           Row(
             mainAxisAlignment: MainAxisAlignment.spaceBetween,
             children: [
@@ -138,7 +138,7 @@ class CheckOutScreen extends StatelessWidget {
           SizedBox(
             height: MediaQueryUtils.getHeightPercentage(context, 0.02),
           ),
-      
+
           // data['screen4'] == "Credit"?
           BlocBuilder<UserBloc, UserState>(
             builder: (context, state) {
@@ -147,28 +147,15 @@ class CheckOutScreen extends StatelessWidget {
                 child: AppTextButton(
                   buttonText: 'Book Now',
                   onPressed: () {
-                    if (isUpdate ==true ) {
-                     // if(AuthenticationBloc.user.)
-                      context.read<UserBloc>().add(BookAppointementEvent());
-                      ScaffoldMessenger.of(context).showSnackBar(
-                        const SnackBar(content: Text('Updated Successfully')),
-                      );
-                      Navigator.pushReplacement(
-                        context,
-                        MaterialPageRoute(
-                          builder: (context) => const HomeScreenBody(),
-                        ),
-                      );
-                    } else {
-                      if (data['screen4'] == "Credit") {
-                        PaymentManager.makePayment(int.parse(price), "EGP")
-                            .then((val) {
-                          context
-                              .read<UserBloc>()
-                              .add(BookAppointementEvent());
+                    if (isUpdate == true) {
+                      showAlertDialog(
+                        context: context,
+                        txt: 'Update',
+                        okOnPressed: () {
+                          context.read<UserBloc>().add(BookAppointementEvent());
                           ScaffoldMessenger.of(context).showSnackBar(
                             const SnackBar(
-                                content: Text('Booked Successfully')),
+                                content: Text('Updated Successfully')),
                           );
                           Navigator.pushReplacement(
                             context,
@@ -176,19 +163,47 @@ class CheckOutScreen extends StatelessWidget {
                               builder: (context) => const HomeScreenBody(),
                             ),
                           );
-                        });
-                      } else {
-                        context.read<UserBloc>().add(BookAppointementEvent());
-                        ScaffoldMessenger.of(context).showSnackBar(
-                          const SnackBar(
-                              content: Text('Booked Successfully')),
-                        );
-                        Navigator.pushReplacement(
-                            context,
-                            MaterialPageRoute(
-                                builder: (context) =>
-                                    const HomeScreenBody()));
-                      }
+                        },
+                      );
+                      // if(AuthenticationBloc.user.)
+                    } else {
+                      showAlertDialog(
+                        context: context,
+                        txt: 'Book',
+                        okOnPressed: () {
+                          if (data['screen4'] == "Credit") {
+                            PaymentManager.makePayment(int.parse(price), "EGP")
+                                .then((val) {
+                              context
+                                  .read<UserBloc>()
+                                  .add(BookAppointementEvent());
+                              ScaffoldMessenger.of(context).showSnackBar(
+                                const SnackBar(
+                                    content: Text('Booked Successfully')),
+                              );
+                              Navigator.pushReplacement(
+                                context,
+                                MaterialPageRoute(
+                                  builder: (context) => const HomeScreenBody(),
+                                ),
+                              );
+                            });
+                          } else {
+                            context
+                                .read<UserBloc>()
+                                .add(BookAppointementEvent());
+                            ScaffoldMessenger.of(context).showSnackBar(
+                              const SnackBar(
+                                  content: Text('Booked Successfully')),
+                            );
+                            Navigator.pushReplacement(
+                                context,
+                                MaterialPageRoute(
+                                    builder: (context) =>
+                                        const HomeScreenBody()));
+                          }
+                        },
+                      );
                     }
                   },
                 ),

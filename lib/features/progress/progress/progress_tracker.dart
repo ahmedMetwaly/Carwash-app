@@ -43,12 +43,16 @@ class _MyAppState extends State<ProgressTrackerScreen> {
   bool locationNotSelected = false;
   void nextButton() {
     setState(() {
+      index++;
+      if (widget.isUpdate && index == 2) {
+        index++;
+      }
       if (index == 1) {
         if (AuthenticationBloc.user.appointment!.address!.address == "") {
-          locationNotSelected = false;
-        } else {
-          index++;
           locationNotSelected = true;
+        } else {
+          // index++;
+          locationNotSelected = false;
         }
         AuthenticationBloc.user.appointment!.address!.address =
             AuthenticationBloc.user.address!.address;
@@ -61,6 +65,9 @@ class _MyAppState extends State<ProgressTrackerScreen> {
     setState(() {
       index--;
       statuList[index].active = true;
+      if (widget.isUpdate && index == 2) {
+        index--;
+      }
     });
   }
 

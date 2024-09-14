@@ -1,8 +1,10 @@
 import 'package:carwashapp/core/constants/colors_manager.dart';
+import 'package:carwashapp/core/widgets/dialogs.dart';
 import 'package:carwashapp/features/auth/controller/user_bloc/user_bloc.dart';
 import 'package:carwashapp/features/auth/controller/user_bloc/user_event.dart';
 import 'package:carwashapp/features/auth/controller/user_bloc/user_state.dart';
 import 'package:carwashapp/features/auth/data/models/appointment_model/appointment_model.dart';
+import 'package:carwashapp/features/home/presentation/pages/main_page.dart';
 import 'package:carwashapp/features/home/presentation/widgets/appointment_details_card.dart';
 import 'package:carwashapp/features/progress/progress/progress_tracker.dart';
 import 'package:flutter/material.dart';
@@ -140,11 +142,24 @@ class ReceiptScreen extends StatelessWidget {
                   height: MediaQueryUtils.getHeightPercentage(context, 0.06),
                   child: OutlinedButton(
                     onPressed: () {
-                      // Handle cancel appointment
-                      AuthenticationBloc.user.appointment =
-                          AppointmentModelAuth.toInitial();
-                      context.read<UserBloc>().add(BookAppointementEvent());
-                      Navigator.of(context).pop();
+                      showAlertDialog(
+                        context: context,
+                        txt: 'Cancel',
+                        okOnPressed: () {
+                          // Handle cancel appointment
+                          AuthenticationBloc.user.appointment =
+                              AppointmentModelAuth.toInitial();
+                          context.read<UserBloc>().add(BookAppointementEvent());
+                          Navigator.of(context).pushReplacement(
+                              MaterialPageRoute(
+                                  builder: (context) =>
+                                      const HomeScreenBody()));
+                          ScaffoldMessenger.of(context).showSnackBar(
+                            const SnackBar(
+                                content: Text('Your Appointment is Canceled')),
+                          );
+                        },
+                      );
                     },
                     style: OutlinedButton.styleFrom(
                       foregroundColor: Colors.red,

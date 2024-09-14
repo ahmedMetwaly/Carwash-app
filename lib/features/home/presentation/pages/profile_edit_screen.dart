@@ -1,7 +1,9 @@
+import 'package:carwashapp/core/widgets/dialogs.dart';
 import 'package:carwashapp/features/auth/controller/auth_bloc/auth_bloc.dart';
 import 'package:carwashapp/features/auth/controller/user_bloc/user_bloc.dart';
 import 'package:carwashapp/features/auth/controller/user_bloc/user_event.dart';
 import 'package:carwashapp/features/auth/controller/user_bloc/user_state.dart';
+import 'package:carwashapp/features/home/presentation/pages/main_page.dart';
 import 'package:carwashapp/features/home/presentation/widgets/change_car_type.dart';
 import 'package:carwashapp/features/home/presentation/widgets/change_profile_pic.dart';
 import 'package:flutter/material.dart';
@@ -86,7 +88,7 @@ class _EditProfileScreenState extends State<EditProfileScreen> {
                       },
                     ),
                     const SizedBox(height: 20),
-                
+
                     // Email field
                     TextFormField(
                       controller: _emailController,
@@ -111,7 +113,7 @@ class _EditProfileScreenState extends State<EditProfileScreen> {
                     const SizedBox(height: 20),
                     const ChangeCarType(),
                     const SizedBox(height: 20),
-                
+
                     // Save button
                     ElevatedButton(
                       style: ButtonStyle(
@@ -119,11 +121,25 @@ class _EditProfileScreenState extends State<EditProfileScreen> {
                               Theme.of(context).colorScheme.primary)),
                       onPressed: () {
                         if (_formKey.currentState!.validate()) {
-                          _formKey.currentState!.save();
-                          AuthenticationBloc.user.name = _nameController.text;
-                          context.read<UserBloc>().add(ChangeProfileEvent());
-                          ScaffoldMessenger.of(context).showSnackBar(
-                            const SnackBar(content: Text('Profile updated')),
+                          showAlertDialog(
+                            context: context,
+                            txt: 'Edit Profile',
+                            okOnPressed: () {
+                              _formKey.currentState!.save();
+                              AuthenticationBloc.user.name =
+                                  _nameController.text;
+                              context
+                                  .read<UserBloc>()
+                                  .add(ChangeProfileEvent());
+                              ScaffoldMessenger.of(context).showSnackBar(
+                                const SnackBar(
+                                    content: Text('Profile updated')),
+                              );
+                              Navigator.push(
+                                  context,
+                                  MaterialPageRoute(
+                                      builder: (context) => HomeScreenBody()));
+                            },
                           );
                         }
                       },
